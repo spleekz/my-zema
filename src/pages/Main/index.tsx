@@ -1,7 +1,7 @@
-import { Box } from '@material-ui/core'
+import { Card, Box, Typography } from '@material-ui/core'
 import { makeStyles } from '@material-ui/styles'
 import React, { FC } from 'react'
-import { MainCard } from './MainCard'
+import { useHistory } from 'react-router'
 
 const useStyles = makeStyles({
   card: {
@@ -10,6 +10,9 @@ const useStyles = makeStyles({
     alignItems: 'center',
     width: '240px',
     height: '370px',
+    '&:hover': {
+      cursor: 'pointer',
+    },
   },
   mainContainer: {
     flex: '1 0 auto',
@@ -20,11 +23,22 @@ const useStyles = makeStyles({
 })
 
 export const MainPage: FC = (): JSX.Element => {
+  const history = useHistory()
+
   const classes = useStyles()
+
   return (
     <Box className={classes.mainContainer}>
-      <MainCard>Случайная песня</MainCard>
-      <MainCard>Тексты песен</MainCard>
+      <Box>
+        <Card className={classes.card} sx={{ backgroundColor: '#ffe7f9' }}>
+          <Typography sx={{ fontSize: '1.7rem' }}>Случайная песня</Typography>
+        </Card>
+      </Box>
+      <Box>
+        <Card className={classes.card} sx={{ backgroundColor: '#ffe7f9' }}>
+          <Typography sx={{ fontSize: '1.7rem' }}>Тексты песен</Typography>
+        </Card>
+      </Box>
     </Box>
   )
 }
