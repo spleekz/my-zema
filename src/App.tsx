@@ -3,6 +3,8 @@ import React from 'react'
 import { Header } from './components/Header'
 import { MainPage } from './pages/Main'
 import { createStyles } from '@material-ui/core'
+import { Redirect, Route, Switch } from 'react-router'
+import { RandomSongPage } from './pages/RandomSong'
 
 const useStyles = makeStyles(() =>
   createStyles({
@@ -29,7 +31,11 @@ export const App = (): JSX.Element => {
     <>
       <GlobalStyles />
       <Header />
-      <MainPage />
+      <Switch>
+        <Route exact path='/' component={MainPage} />
+        <Route exact path='/randomsong' component={RandomSongPage} />
+        <Redirect to='/' />
+      </Switch>
     </>
   )
 }
