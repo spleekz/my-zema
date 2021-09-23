@@ -12,6 +12,8 @@ const useStyles = makeStyles(() =>
       body: {
         padding: 0,
         margin: 0,
+        backgroundColor: '#f3f3f3',
+        fontFamily: 'Alegreya Sans SC, sans-serif !important',
       },
       '#root': {
         height: '100vh',
