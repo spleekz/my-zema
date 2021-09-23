@@ -10,6 +10,7 @@ const useStyles = makeStyles({
     alignItems: 'center',
     width: '240px',
     height: '370px',
+    padding: '15px',
     '&:hover': {
       cursor: 'pointer',
     },
@@ -30,13 +31,13 @@ export const MainPage: FC = (): JSX.Element => {
   return (
     <Box className={classes.mainContainer}>
       <Box onClick={() => history.push('/randomsong')}>
-        <Card className={classes.card} sx={{ backgroundColor: '#ffe7f9' }}>
-          <Typography sx={{ fontSize: '1.7rem' }}>Случайная песня</Typography>
+        <Card className={classes.card} sx={{ backgroundColor: '#ffffff', borderRadius: '7px' }}>
+          <Typography sx={{ fontSize: '1.7rem', color: '#666666 ' }}>Случайная песня</Typography>
         </Card>
       </Box>
       <Box>
-        <Card className={classes.card} sx={{ backgroundColor: '#ffe7f9' }}>
-          <Typography sx={{ fontSize: '1.7rem' }}>Тексты песен</Typography>
+        <Card className={classes.card} sx={{ backgroundColor: '#ffffff', borderRadius: '7px' }}>
+          <Typography sx={{ fontSize: '1.7rem', color: '#666666 ' }}>Тексты песен</Typography>
         </Card>
       </Box>
     </Box>
