@@ -29,7 +29,7 @@ export const MainPage: FC = (): JSX.Element => {
 
   return (
     <Box className={classes.mainContainer}>
-      <Box>
+      <Box onClick={() => history.push('/randomsong')}>
         <Card className={classes.card} sx={{ backgroundColor: '#ffe7f9' }}>
           <Typography sx={{ fontSize: '1.7rem' }}>Случайная песня</Typography>
         </Card>
