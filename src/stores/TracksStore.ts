@@ -19,12 +19,12 @@ export class TracksStore implements ITracksStore {
       albums.forEach((album, albumIndex) => {
         TracksApi.loadAlbumSongs(album.id_album).then((tracks) => {
           tracks.forEach((track, trackIndex) => {
+            accumTracks.push(track)
             if (trackIndex === tracks.length - 1 && albumIndex === albums.length - 1) {
               runInAction(() => {
                 this.tracks = accumTracks
               })
             }
-            accumTracks.push(track)
           })
         })
       })
