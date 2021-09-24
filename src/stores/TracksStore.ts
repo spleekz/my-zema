@@ -14,13 +14,17 @@ export class TracksStore implements ITracksStore {
   tracks: Array<ITrack> = []
 
   loadTracks(): void {
+    const accumTracks: Array<ITrack> = []
     TracksApi.loadAllAlbums().then((albums) => {
-      albums.forEach((album) => {
+      albums.forEach((album, albumIndex) => {
         TracksApi.loadAlbumSongs(album.id_album).then((tracks) => {
-          tracks.forEach((track) => {
-            runInAction(() => {
-              this.tracks.push(track)
-            })
+          tracks.forEach((track, trackIndex) => {
+            if (trackIndex === tracks.length - 1 && albumIndex === albums.length - 1) {
+              runInAction(() => {
+                this.tracks = accumTracks
+              })
+            }
+            accumTracks.push(track)
           })
         })
       })
