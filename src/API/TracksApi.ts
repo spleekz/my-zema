@@ -30,7 +30,7 @@ export const TracksApi: ITracksApi = {
       .get<IAllAlbumsResponse>(
         `https://api.happi.dev/v1/music/artists/22976/albums?apikey=c1daf3EdSn0uqoCNEb0lJZC4oFEzSBeKnmze4rCYe34uev977TGPRjVn`
       )
-      .then((res) => res.data.result.albums)
+      .then((res) => res.data.result.albums.filter((al) => al.id_album !== 511694 && al.id_album !== 38633))
   },
   loadAlbumSongs: (albumId: number) => {
     return axios
