@@ -1,45 +1,54 @@
-import { Card, Box, Typography } from '@material-ui/core'
-import { makeStyles } from '@material-ui/styles'
 import React, { FC } from 'react'
 import { useHistory } from 'react-router'
+import styled from 'styled-components'
 
-const useStyles = makeStyles({
-  card: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: '240px',
-    height: '370px',
-    padding: '15px',
-    '&:hover': {
-      cursor: 'pointer',
-    },
-  },
-  mainContainer: {
-    flex: '1 0 auto',
-    display: 'flex',
-    justifyContent: 'space-around',
-    alignItems: 'center',
-  },
-})
+const MainPageWrapper = styled.div`
+  flex: 1 0 auto;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+`
+const MainPageContainer = styled.div`
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+`
+const CardContainer = styled.div`
+  width: 400px;
+  height: 400px;
+  font-size: 37px;
+  background-color: #ffffff;
+  border-radius: 7px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &:hover {
+    cursor: pointer;
+  }
+`
+const MainTitle = styled.div`
+  font-size: 50px;
+  font-weight: bold;
+  text-align: center;
+`
+const CardSection = styled.div`
+  display: flex;
+  justify-content: space-around;
+`
 
 export const MainPage: FC = (): JSX.Element => {
   const history = useHistory()
 
-  const classes = useStyles()
-
   return (
-    <Box className={classes.mainContainer}>
-      <Box onClick={() => history.push('/randomsong')}>
-        <Card className={classes.card} sx={{ backgroundColor: '#ffffff', borderRadius: '7px' }}>
-          <Typography sx={{ fontSize: '1.7rem', color: '#666666 ' }}>Случайная песня</Typography>
-        </Card>
-      </Box>
-      <Box>
-        <Card className={classes.card} sx={{ backgroundColor: '#ffffff', borderRadius: '7px' }}>
-          <Typography sx={{ fontSize: '1.7rem', color: '#666666 ' }}>Тексты песен</Typography>
-        </Card>
-      </Box>
-    </Box>
+    <MainPageWrapper>
+      <MainTitle>Выбирайте</MainTitle>
+      <MainPageContainer>
+        <CardSection>
+          <CardContainer onClick={() => history.push('/randomsong')}>Случайная песня</CardContainer>
+          <CardContainer>Тексты песен</CardContainer>
+        </CardSection>
+      </MainPageContainer>
+    </MainPageWrapper>
   )
 }
