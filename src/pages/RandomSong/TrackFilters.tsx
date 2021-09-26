@@ -4,9 +4,10 @@ import { Field, Form, Formik } from 'formik'
 import { Button, Checkbox } from '@material-ui/core'
 import { useStore } from '../../stores/RootStore/RootStoreContext'
 import { FormControlLabel } from '@material-ui/core'
+import { FilterValues } from '../../stores/TracksStore'
 
 interface IFormValues {
-  [key: string]: Array<string>
+  [key: string]: Array<FilterValues>
 }
 
 const FilterCategoryContainer = styled.div`
@@ -52,7 +53,7 @@ export const TrackFilters: FC = (): JSX.Element => {
     {}
   )
   const handleSubmit = (values: IFormValues) => {
-    alert(JSON.stringify(values))
+    alert(JSON.stringify(values, null, 2))
   }
 
   return (
