@@ -1,15 +1,27 @@
 import { makeAutoObservable, runInAction } from 'mobx'
 import { ITrack, TracksApi } from '../API/TracksApi'
 
-interface IFilterCategory {
-  name: string
-  value: string
-  filters: Array<IFilter>
-}
+type CategoryValues = 'mood' | 'tempo' | 'extra'
+export type FilterValues =
+  | 'happy'
+  | 'sad'
+  | 'calm'
+  | 'fast'
+  | 'slow'
+  | 'popular'
+  | 'words'
+  | 'melody'
+  | 'live'
+
 interface IFilter {
   title: string
-  value: string
+  value: FilterValues
   checked: boolean
+}
+interface IFilterCategory {
+  name: string
+  value: CategoryValues
+  filters: Array<IFilter>
 }
 export interface ITracksStore {
   tracks: Array<ITrack>
@@ -23,7 +35,7 @@ export class TracksStore implements ITracksStore {
   }
 
   tracks: Array<ITrack> = []
-  filters = [
+  filters: Array<IFilterCategory> = [
     {
       name: 'Настроение',
       value: 'mood',
