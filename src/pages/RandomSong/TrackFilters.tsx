@@ -1,13 +1,14 @@
 import React, { FC } from 'react'
 import styled from 'styled-components'
 import { Field, Form, Formik } from 'formik'
-import { Button, Checkbox } from '@material-ui/core'
+import { Button, Checkbox, Radio, RadioGroup } from '@material-ui/core'
 import { useStore } from '../../stores/RootStore/RootStoreContext'
 import { FormControlLabel } from '@material-ui/core'
 import { FilterValues } from '../../stores/TracksStore'
 
 interface IFormValues {
-  [key: string]: Array<FilterValues>
+  checkbox: Array<FilterValues>
+  radio: FilterValues
 }
 
 const FilterCategoryContainer = styled.div`
@@ -28,32 +29,48 @@ export const TrackFilters: FC = (): JSX.Element => {
     return (
       <FilterCategoryContainer key={category.value}>
         <FilterCategoryTitle>{category.name}</FilterCategoryTitle>
-        {category.filters.map((filter) => {
-          return (
-            <Field
-              as={FormControlLabel}
-              control={<Checkbox />}
-              name={category.value}
-              value={filter.value}
-              labelPlacement='top'
-              label={filter.title}
-              key={filter.value}
-            ></Field>
-          )
-        })}
+        {category.value === 'tempo' ? (
+          <RadioGroup>
+            {category.filters.map((filter) => {
+              return (
+                <Field
+                  as={FormControlLabel}
+                  control={<Radio />}
+                  name='radio'
+                  value={filter.value}
+                  labelPlacement='top'
+                  label={filter.title}
+                  key={filter.value}
+                />
+              )
+            })}
+          </RadioGroup>
+        ) : (
+          category.filters.map((filter) => {
+            return (
+              <Field
+                as={FormControlLabel}
+                control={<Checkbox />}
+                name='checkbox'
+                value={filter.value}
+                labelPlacement='top'
+                label={filter.title}
+                key={filter.value}
+              />
+            )
+          })
+        )}
       </FilterCategoryContainer>
     )
   })
 
-  const initialFormValues: IFormValues = TracksStore.filters.reduce(
-    (acc: IFormValues, category) => {
-      acc[category.value] = []
-      return acc
-    },
-    {}
-  )
+  const initialFormValues: IFormValues = {
+    checkbox: [],
+    radio: 'medium',
+  }
   const handleSubmit = (values: IFormValues) => {
-    alert(JSON.stringify(values, null, 2))
+    const formData: Array<FilterValues> = [...values.checkbox, values.radio]
+    alert(JSON.stringify(formData, null, 2))
   }
 
   return (
