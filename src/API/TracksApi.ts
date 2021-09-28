@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-enum Tracks {
+export enum Tracks {
   V_METRO = 10626035,
   GOSPODA = 10626041,
   KOGDA_SNEG_NACHNETSYA = 10626040,
@@ -72,7 +72,7 @@ enum Tracks {
   ZHYZHA = 2870243,
   POVESITSYA = 2870242,
   BLYZ = 2870241,
-  PAZNIE = 2870240,
+  RAZNIE = 2870240,
   DRYG = 2870239,
   SAMOLET = 2870238,
   TAK_I_OSTAVIM = 2870237,
