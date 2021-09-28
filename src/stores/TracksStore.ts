@@ -28,6 +28,9 @@ interface IFilterCategory {
   value: CategoryValues
   filters: Array<IFilter>
 }
+export interface ITrackWithGenres extends ITrack {
+  genres: Array<FilterValues>
+}
 export interface ITracksStore {
   tracks: Array<ITrack>
   filters: Array<IFilterCategory>
