@@ -1,12 +1,13 @@
 import { makeAutoObservable, runInAction } from 'mobx'
 import { ITrack, TracksApi } from '../API/TracksApi'
 
-type CategoryValues = 'mood' | 'tempo' | 'extra'
+export type CategoryValues = 'mood' | 'tempo' | 'extra'
 export type FilterValues =
   | 'happy'
   | 'sad'
-  | 'calm'
-  | 'aggressive'
+  | 'lite'
+  | 'energetic'
+  | 'drama'
   | 'dream'
   | 'fast'
   | 'medium'
@@ -46,8 +47,9 @@ export class TracksStore implements ITracksStore {
       filters: [
         { title: 'Весёлое', value: 'happy', checked: false },
         { title: 'Грустное', value: 'sad', checked: false },
-        { title: 'Спокойное', value: 'calm', checked: false },
-        { title: 'Агрессивное', value: 'aggressive', checked: false },
+        { title: 'Лёгкое', value: 'lite', checked: false },
+        { title: 'Драматичное', value: 'drama', checked: false },
+        { title: 'Энергичное', value: 'energetic', checked: false },
         { title: 'Мечтательное', value: 'dream', checked: false },
       ],
     },
