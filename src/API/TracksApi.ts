@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { leaveKeysInObject } from '../utils/leaveKeysInObject'
 
 export enum Tracks {
   V_METRO = 10626035,
@@ -110,6 +111,7 @@ export enum Tracks {
 interface IAlbum {
   album: string
   id_album: number
+  cover: string
 }
 export interface ITrack {
   id_track: Tracks
@@ -122,6 +124,8 @@ interface IAllAlbumsResponse {
 }
 interface IAlbumTracksResponse {
   result: {
+    album: string
+    id_album: number
     tracks: Array<ITrack>
   }
 }
@@ -137,15 +141,27 @@ export const TracksApi: ITracksApi = {
       .get<IAllAlbumsResponse>(
         `https://api.happi.dev/v1/music/artists/22976/albums?apikey=c1daf3EdSn0uqoCNEb0lJZC4oFEzSBeKnmze4rCYe34uev977TGPRjVn`
       )
-      .then((res) =>
-        res.data.result.albums.filter((al) => al.id_album !== 511694 && al.id_album !== 38633)
-      )
+      .then((res) => {
+        const resData = leaveKeysInObject(res.data, ['result'])
+        resData.result = leaveKeysInObject(res.data.result, ['albums'])
+        resData.result.albums = resData.result.albums.map((album) =>
+          leaveKeysInObject(album, ['album', 'id_album', 'cover'])
+        )
+        return resData.result.albums.filter((al) => al.id_album !== 511694 && al.id_album !== 38633)
+      })
   },
   loadAlbumSongs: (albumId: number) => {
     return axios
       .get<IAlbumTracksResponse>(
         `https://api.happi.dev/v1/music/artists/22976/albums/${albumId}/tracks?apikey=c1daf3EdSn0uqoCNEb0lJZC4oFEzSBeKnmze4rCYe34uev977TGPRjVn`
       )
-      .then((res) => res.data.result.tracks)
+      .then((res) => {
+        const resData = leaveKeysInObject(res.data, ['result'])
+        resData.result = leaveKeysInObject(res.data.result, ['album', 'id_album', 'tracks'])
+        resData.result.tracks = resData.result.tracks.map((track) =>
+          leaveKeysInObject(track, ['id_track', 'track'])
+        )
+        return res.data.result.tracks
+      })
   },
 }
