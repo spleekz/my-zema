@@ -1,5 +1,6 @@
 import { makeAutoObservable } from 'mobx'
 import { ITrack, TracksApi, IAlbum } from '../API/TracksApi'
+import { addGenresForTracks } from '../utils/addGenresForTrack'
 
 export type CategoryValues = 'mood' | 'tempo' | 'extra'
 export type FilterValues =
@@ -32,7 +33,7 @@ export interface ITrackWithGenres extends ITrack {
 }
 export interface ITracksStore {
   albums: Array<IAlbum>
-  tracks: Array<ITrack>
+  tracks: Array<ITrackWithGenres>
   filters: Array<IFilterCategory>
   setAlbums(albums: Array<IAlbum>): void
   setTracks(tracks: Array<ITrack>): void
@@ -45,7 +46,7 @@ export class TracksStore implements ITracksStore {
   }
 
   albums: Array<IAlbum> = []
-  tracks: Array<ITrack> = []
+  tracks: Array<ITrackWithGenres> = []
   filters: Array<IFilterCategory> = [
     {
       name: 'Настроение',
@@ -80,7 +81,7 @@ export class TracksStore implements ITracksStore {
       ],
     },
   ]
-  setTracks(tracks: Array<ITrack>): void {
+  setTracks(tracks: Array<ITrackWithGenres>): void {
     this.tracks = tracks
   }
   setAlbums(albums: Array<IAlbum>): void {
@@ -88,13 +89,14 @@ export class TracksStore implements ITracksStore {
   }
   loadTracks(): void {
     const accumAlbums: Array<IAlbum> = []
-    const accumTracks: Array<ITrack> = []
+    const accumTracks: Array<ITrackWithGenres> = []
     TracksApi.loadAllAlbums().then((albums) => {
       albums.forEach((album, albumIndex) => {
         accumAlbums.push(album)
         TracksApi.loadAlbumSongs(album.id_album).then((tracks) => {
           tracks.forEach((track, trackIndex) => {
-            accumTracks.push(track)
+            const trackWithGenre: ITrackWithGenres = addGenresForTracks(track)
+            accumTracks.push(trackWithGenre)
             if (trackIndex === tracks.length - 1 && albumIndex === albums.length - 1) {
               this.setTracks(accumTracks)
               this.setAlbums(accumAlbums)
