@@ -108,7 +108,7 @@ export enum Tracks {
   REKA_LIVE = 2870533,
 }
 
-interface IAlbum {
+export interface IAlbum {
   album: string
   id_album: number
   cover: string
