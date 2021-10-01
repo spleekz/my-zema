@@ -21,7 +21,6 @@ export type FilterValues =
 interface IFilter {
   title: string
   value: FilterValues
-  checked: boolean
 }
 interface IFilterCategory {
   name: string
@@ -50,32 +49,32 @@ export class TracksStore implements ITracksStore {
       name: 'Настроение',
       value: 'mood',
       filters: [
-        { title: 'Весёлое', value: 'happy', checked: false },
-        { title: 'Грустное', value: 'sad', checked: false },
-        { title: 'Лёгкое', value: 'lite', checked: false },
-        { title: 'Драматичное', value: 'drama', checked: false },
-        { title: 'Энергичное', value: 'energetic', checked: false },
-        { title: 'Мечтательное', value: 'dream', checked: false },
+        { title: 'Весёлое', value: 'happy' },
+        { title: 'Грустное', value: 'sad' },
+        { title: 'Лёгкое', value: 'lite' },
+        { title: 'Драматичное', value: 'drama' },
+        { title: 'Энергичное', value: 'energetic' },
+        { title: 'Мечтательное', value: 'dream' },
       ],
     },
     {
       name: 'Темп',
       value: 'tempo',
       filters: [
-        { title: 'Быстрый', value: 'fast', checked: false },
-        { title: 'Умеренный', value: 'medium', checked: false },
-        { title: 'Медленный', value: 'slow', checked: false },
+        { title: 'Быстрый', value: 'fast' },
+        { title: 'Умеренный', value: 'medium' },
+        { title: 'Медленный', value: 'slow' },
       ],
     },
     {
       name: 'Дополнительно',
       value: 'extra',
       filters: [
-        { title: 'Популярная', value: 'popular', checked: false },
-        { title: 'Запоминающиеся слова', value: 'words', checked: false },
-        { title: 'Красивая музка', value: 'melody', checked: false },
-        { title: 'Успокаивает', value: 'makeCalm', checked: false },
-        { title: 'Live', value: 'live', checked: false },
+        { title: 'Популярная', value: 'popular' },
+        { title: 'Запоминающиеся слова', value: 'words' },
+        { title: 'Красивая музка', value: 'melody' },
+        { title: 'Успокаивает', value: 'makeCalm' },
+        { title: 'Live', value: 'live' },
       ],
     },
   ]
