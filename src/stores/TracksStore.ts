@@ -20,6 +20,7 @@ export type FilterValues =
   | 'melody'
   | 'makeCalm'
   | 'live'
+  | 'anyTempo'
 
 interface IFilter {
   title: string
@@ -74,6 +75,7 @@ export class TracksStore implements ITracksStore {
         { title: 'Быстрый', value: 'fast' },
         { title: 'Умеренный', value: 'medium' },
         { title: 'Медленный', value: 'slow' },
+        { title: 'Любой', value: 'anyTempo' },
       ],
     },
     {
@@ -93,7 +95,7 @@ export class TracksStore implements ITracksStore {
     const randomIndex = getRandom(0, this.allowedTracks.length - 1)
     return this.allowedTracks[randomIndex]
   }
-  
+
   setTracks(tracks: Array<ITrackWithGenres>): void {
     this.tracks = tracks
   }
