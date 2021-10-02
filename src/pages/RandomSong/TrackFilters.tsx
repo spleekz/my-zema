@@ -30,7 +30,7 @@ export const TrackFilters: FC = (): JSX.Element => {
       <FilterCategoryContainer key={category.value}>
         <FilterCategoryTitle>{category.name}</FilterCategoryTitle>
         {category.value === 'tempo' ? (
-          <RadioGroup value='anyTempo'>
+          <RadioGroup defaultValue='anyTempo'>
             {category.filters.map((filter) => {
               return (
                 <Field
