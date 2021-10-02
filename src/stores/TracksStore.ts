@@ -91,10 +91,14 @@ export class TracksStore implements ITracksStore {
     const accumAlbums: Array<IAlbum> = []
     const accumTracks: Array<ITrackWithGenres> = []
     TracksApi.loadAllAlbums().then((albums) => {
-      albums.forEach((album, albumIndex) => {
+      let albumIndex = -1
+      albums.forEach((album) => {
+        albumIndex++
         accumAlbums.push(album)
         TracksApi.loadAlbumSongs(album.id_album).then((tracks) => {
-          tracks.forEach((track, trackIndex) => {
+          let trackIndex = -1
+          tracks.forEach((track) => {
+            trackIndex++
             const trackWithGenre: ITrackWithGenres = addGenresForTracks(track)
             accumTracks.push(trackWithGenre)
             if (trackIndex === tracks.length - 1 && albumIndex === albums.length - 1) {
