@@ -70,7 +70,7 @@ export const TrackFilters: FC = (): JSX.Element => {
   }
   const handleSubmit = (values: IFormValues) => {
     const formData: Array<FilterValues> = [...values.checkbox, values.radio]
-    alert(JSON.stringify(formData, null, 2))
+    TracksStore.getAllowedTracks(formData)
   }
 
   return (
