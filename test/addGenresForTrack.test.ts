@@ -4,8 +4,8 @@ import { ITrack } from '../src/API/TracksApi'
 test('genres array should be added for track', () => {
   const track: ITrack = {
     id_track: 526707,
-    albumImage:'sting',
-    albumName:'string',
+    albumImage: 'sting',
+    albumName: 'string',
     track: 'Ариведерчи',
   }
   const trackWithGenre = addGenresForTracks(track)
