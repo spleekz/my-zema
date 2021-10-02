@@ -2,6 +2,7 @@ import { makeAutoObservable } from 'mobx'
 import { ITrack, TracksApi, IAlbum } from '../API/TracksApi'
 import { addGenresForTracks } from '../utils/addGenresForTrack'
 import { arrayIncludes } from '../utils/arrayIncludes'
+import { getRandom } from '../utils/getRandom'
 
 export type CategoryValues = 'mood' | 'tempo' | 'extra'
 export type FilterValues =
@@ -37,6 +38,7 @@ export interface ITracksStore {
   tracks: Array<ITrackWithGenres>
   filters: Array<IFilterCategory>
   allowedTracks: Array<ITrackWithGenres>
+  yourTrack: ITrackWithGenres
   setAlbums(albums: Array<IAlbum>): void
   setTracks(tracks: Array<ITrack>): void
   loadTracks(): void
@@ -86,6 +88,12 @@ export class TracksStore implements ITracksStore {
       ],
     },
   ]
+
+  get yourTrack(): ITrackWithGenres {
+    const randomIndex = getRandom(0, this.allowedTracks.length - 1)
+    return this.allowedTracks[randomIndex]
+  }
+  
   setTracks(tracks: Array<ITrackWithGenres>): void {
     this.tracks = tracks
   }
