@@ -21,6 +21,7 @@ export type FilterValues =
   | 'makeCalm'
   | 'live'
   | 'anyTempo'
+  | 'anyMood'
 
 interface IFilter {
   title: string
@@ -66,6 +67,7 @@ export class TracksStore implements ITracksStore {
         { title: 'Драматичное', value: 'drama' },
         { title: 'Энергичное', value: 'energetic' },
         { title: 'Мечтательное', value: 'dream' },
+        { title: 'Любое', value: 'anyMood' },
       ],
     },
     {
