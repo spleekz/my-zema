@@ -6,9 +6,10 @@ import { useStore } from '../../stores/RootStore/RootStoreContext'
 import { FormControlLabel } from '@material-ui/core'
 import { FilterValues } from '../../stores/TracksStore'
 
-interface IFormValues {
-  checkbox: Array<FilterValues>
-  radio: FilterValues
+export interface IFormValues {
+  mood: Array<FilterValues>
+  extra: Array<FilterValues>
+  tempo: FilterValues
 }
 
 const FilterCategoryContainer = styled.div`
@@ -26,11 +27,12 @@ export const TrackFilters: FC = (): JSX.Element => {
   const { TracksStore } = useStore()
 
   const initialFormValues: IFormValues = {
-    checkbox: [],
-    radio: 'anyTempo',
+    mood: [],
+    extra: [],
+    tempo: 'anyTempo',
   }
   const handleSubmit = (values: IFormValues) => {
-    const formData: Array<FilterValues> = [...values.checkbox, values.radio].filter(
+    const formData: Array<FilterValues> = [...values.mood, ...values.extra, values.tempo].filter(
       (filter) => filter !== 'anyTempo' && filter !== 'anyMood'
     )
 
@@ -52,8 +54,8 @@ export const TrackFilters: FC = (): JSX.Element => {
                         return (
                           <Field
                             as={FormControlLabel}
-                            control={<Radio checked={values.radio === filter.value} />}
-                            name='radio'
+                            control={<Radio checked={values.tempo === filter.value} />}
+                            name='tempo'
                             value={filter.value}
                             labelPlacement='top'
                             label={filter.title}
@@ -71,22 +73,23 @@ export const TrackFilters: FC = (): JSX.Element => {
                             filter.value === 'anyMood' ? (
                               <Checkbox
                                 onChange={() => {
-                                  if (!values.checkbox.includes('anyMood')) {
-                                    setFieldValue('checkbox', ['anyMood'])
+                                  if (!values.mood.includes('anyMood')) {
+                                    setFieldValue('mood', ['anyMood'])
                                   } else {
-                                    setFieldValue('checkbox', [])
+                                    setFieldValue('mood', [])
                                   }
                                 }}
-                                checked={values.checkbox.some((v) => v === filter.value)}
                               />
                             ) : (
                               <Checkbox
-                                disabled={values.checkbox.includes('anyMood')}
-                                checked={values.checkbox.some((v) => v === filter.value)}
+                                disabled={category.value === 'mood' && values.mood.includes('anyMood')}
                               />
                             )
                           }
-                          name='checkbox'
+                          checked={values[category.value as 'mood' | 'extra'].some(
+                            (v) => v === filter.value
+                          )}
+                          name={category.value}
                           value={filter.value}
                           labelPlacement='top'
                           label={filter.title}
