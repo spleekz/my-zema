@@ -25,62 +25,83 @@ const FilterCategoryTitle = styled.div`
 export const TrackFilters: FC = (): JSX.Element => {
   const { TracksStore } = useStore()
 
-  const filters = TracksStore.filters.map((category) => {
-    return (
-      <FilterCategoryContainer key={category.value}>
-        <FilterCategoryTitle>{category.name}</FilterCategoryTitle>
-        {category.value === 'tempo' ? (
-          <RadioGroup defaultValue='anyTempo'>
-            {category.filters.map((filter) => {
-              return (
-                <Field
-                  as={FormControlLabel}
-                  control={<Radio />}
-                  name='radio'
-                  value={filter.value}
-                  labelPlacement='top'
-                  label={filter.title}
-                  key={filter.value}
-                />
-              )
-            })}
-          </RadioGroup>
-        ) : (
-          category.filters.map((filter) => {
-            return (
-              <Field
-                as={FormControlLabel}
-                control={<Checkbox />}
-                name='checkbox'
-                value={filter.value}
-                labelPlacement='top'
-                label={filter.title}
-                key={filter.value}
-              />
-            )
-          })
-        )}
-      </FilterCategoryContainer>
-    )
-  })
-
   const initialFormValues: IFormValues = {
     checkbox: [],
     radio: 'anyTempo',
   }
   const handleSubmit = (values: IFormValues) => {
     const formData: Array<FilterValues> = [...values.checkbox, values.radio].filter(
-      (filter) => filter !== 'anyTempo'
+      (filter) => filter !== 'anyTempo' && filter !== 'anyMood'
     )
+
     TracksStore.getAllowedTracks(formData)
   }
 
   return (
-    <Formik initialValues={initialFormValues} onSubmit={handleSubmit}>
-      <Form>
-        {filters}
-        <Button type='submit'>Submit</Button>
-      </Form>
+    <Formik initialValues={initialFormValues} onSubmit={handleSubmit} enableReinitialize>
+      {({ values, setFieldValue }) => {
+        return (
+          <Form>
+            {TracksStore.filters.map((category) => {
+              return (
+                <FilterCategoryContainer key={category.value}>
+                  <FilterCategoryTitle>{category.name}</FilterCategoryTitle>
+                  {category.value === 'tempo' ? (
+                    <RadioGroup>
+                      {category.filters.map((filter) => {
+                        return (
+                          <Field
+                            as={FormControlLabel}
+                            control={<Radio checked={values.radio === filter.value} />}
+                            name='radio'
+                            value={filter.value}
+                            labelPlacement='top'
+                            label={filter.title}
+                            key={filter.value}
+                          />
+                        )
+                      })}
+                    </RadioGroup>
+                  ) : (
+                    category.filters.map((filter) => {
+                      return (
+                        <Field
+                          as={FormControlLabel}
+                          control={
+                            filter.value === 'anyMood' ? (
+                              <Checkbox
+                                onChange={() => {
+                                  if (!values.checkbox.includes('anyMood')) {
+                                    setFieldValue('checkbox', ['anyMood'])
+                                  } else {
+                                    setFieldValue('checkbox', [])
+                                  }
+                                }}
+                                checked={values.checkbox.some((v) => v === filter.value)}
+                              />
+                            ) : (
+                              <Checkbox
+                                disabled={values.checkbox.includes('anyMood')}
+                                checked={values.checkbox.some((v) => v === filter.value)}
+                              />
+                            )
+                          }
+                          name='checkbox'
+                          value={filter.value}
+                          labelPlacement='top'
+                          label={filter.title}
+                          key={filter.value}
+                        />
+                      )
+                    })
+                  )}
+                </FilterCategoryContainer>
+              )
+            })}
+            <Button type='submit'>Submit</Button>
+          </Form>
+        )
+      }}
     </Formik>
   )
 }
