@@ -1,6 +1,6 @@
 import React, { FC } from 'react'
 import styled from 'styled-components'
-import { TrackFilters } from './TrackFilters'
+import { ChooseFilters } from './ChooseFilters'
 import { ChooseAlbums } from './ChooseAlbums'
 import { Formik } from 'formik'
 import { FilterValues } from '../../stores/TracksStore'
@@ -63,7 +63,7 @@ export const AllFilters: FC = (): JSX.Element => {
               <SongFiltersBox>
                 <SongFiltersTitle>Выберите, какую песню хотите услышать</SongFiltersTitle>
                 <Divider />
-                <TrackFilters values={values} setFieldValue={setFieldValue} />
+                <ChooseFilters values={values} setFieldValue={setFieldValue} />
               </SongFiltersBox>
               <ChooseAlbums values={values} setFieldValue={setFieldValue} />
             </>

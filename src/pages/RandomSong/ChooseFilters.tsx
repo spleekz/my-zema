@@ -16,7 +16,7 @@ interface TrackFiltersProps {
   ) => void
 }
 
-const FiltersContainer = styled.div``
+const ChooseFiltersContainer = styled.div``
 const FilterCategoryContainer = styled.div`
   display: inline-block;
   margin: 7px;
@@ -28,11 +28,11 @@ const FilterCategoryTitle = styled.div`
   margin-bottom: 13px;
 `
 
-export const TrackFilters: FC<TrackFiltersProps> = ({ values, setFieldValue }): JSX.Element => {
+export const ChooseFilters: FC<TrackFiltersProps> = ({ values, setFieldValue }): JSX.Element => {
   const { TracksStore } = useStore()
 
   return (
-    <FiltersContainer>
+    <ChooseFiltersContainer>
       <Form>
         {TracksStore.filters.map((category) => {
           return (
@@ -93,6 +93,6 @@ export const TrackFilters: FC<TrackFiltersProps> = ({ values, setFieldValue }): 
         })}
         <Button type='submit'>Submit</Button>
       </Form>
-    </FiltersContainer>
+    </ChooseFiltersContainer>
   )
 }
