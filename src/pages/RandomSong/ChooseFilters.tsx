@@ -2,6 +2,15 @@ import React, { FC } from 'react'
 import styled from 'styled-components'
 import { TrackFilters } from './TrackFilters'
 import { ChooseAlbums } from './ChooseAlbums'
+import { Formik } from 'formik'
+import { FilterValues } from '../../stores/TracksStore'
+import { useStore } from '../../stores/RootStore/RootStoreContext'
+
+export interface IFormValues {
+  mood: Array<FilterValues>
+  extra: Array<FilterValues>
+  tempo: FilterValues
+}
 
 const ChooseFiltersPageContainer = styled.div`
   display: flex;
@@ -28,14 +37,37 @@ const Divider = styled.hr`
 `
 
 export const ChooseFilters: FC = (): JSX.Element => {
+  const { TracksStore } = useStore()
+
+  const initialFormValues: IFormValues = {
+    mood: [],
+    extra: [],
+    tempo: 'anyTempo',
+  }
+  const handleSubmit = (values: IFormValues) => {
+    const formData: Array<FilterValues> = [...values.mood, ...values.extra, values.tempo].filter(
+      (filter) => filter !== 'anyTempo' && filter !== 'anyMood'
+    )
+
+    TracksStore.getAllowedTracks(formData)
+  }
+
   return (
     <ChooseFiltersPageContainer>
-      <SongFiltersBox>
-        <SongFiltersTitle>Выберите, какую песню хотите услышать</SongFiltersTitle>
-        <Divider />
-        <TrackFilters />
-      </SongFiltersBox>
-      <ChooseAlbums />
+      <Formik initialValues={initialFormValues} onSubmit={handleSubmit} enableReinitialize>
+        {({ values, setFieldValue }) => {
+          return (
+            <>
+              <SongFiltersBox>
+                <SongFiltersTitle>Выберите, какую песню хотите услышать</SongFiltersTitle>
+                <Divider />
+                <TrackFilters values={values} setFieldValue={setFieldValue} />
+              </SongFiltersBox>
+              <ChooseAlbums />
+            </>
+          )
+        }}
+      </Formik>
     </ChooseFiltersPageContainer>
   )
 }
