@@ -12,6 +12,7 @@ export interface IFormValues {
   tempo: FilterValues
 }
 
+const FiltersContainer = styled.div``
 const FilterCategoryContainer = styled.div`
   display: inline-block;
   margin: 7px;
@@ -40,71 +41,75 @@ export const TrackFilters: FC = (): JSX.Element => {
   }
 
   return (
-    <Formik initialValues={initialFormValues} onSubmit={handleSubmit} enableReinitialize>
-      {({ values, setFieldValue }) => {
-        return (
-          <Form>
-            {TracksStore.filters.map((category) => {
-              return (
-                <FilterCategoryContainer key={category.value}>
-                  <FilterCategoryTitle>{category.name}</FilterCategoryTitle>
-                  {category.value === 'tempo' ? (
-                    <RadioGroup>
-                      {category.filters.map((filter) => {
+    <FiltersContainer>
+      <Formik initialValues={initialFormValues} onSubmit={handleSubmit} enableReinitialize>
+        {({ values, setFieldValue }) => {
+          return (
+            <Form>
+              {TracksStore.filters.map((category) => {
+                return (
+                  <FilterCategoryContainer key={category.value}>
+                    <FilterCategoryTitle>{category.name}</FilterCategoryTitle>
+                    {category.value === 'tempo' ? (
+                      <RadioGroup>
+                        {category.filters.map((filter) => {
+                          return (
+                            <Field
+                              as={FormControlLabel}
+                              control={<Radio checked={values.tempo === filter.value} />}
+                              name='tempo'
+                              value={filter.value}
+                              labelPlacement='top'
+                              label={filter.title}
+                              key={filter.value}
+                            />
+                          )
+                        })}
+                      </RadioGroup>
+                    ) : (
+                      category.filters.map((filter) => {
                         return (
                           <Field
                             as={FormControlLabel}
-                            control={<Radio checked={values.tempo === filter.value} />}
-                            name='tempo'
+                            control={
+                              filter.value === 'anyMood' ? (
+                                <Checkbox
+                                  onChange={() => {
+                                    if (!values.mood.includes('anyMood')) {
+                                      setFieldValue('mood', ['anyMood'])
+                                    } else {
+                                      setFieldValue('mood', [])
+                                    }
+                                  }}
+                                />
+                              ) : (
+                                <Checkbox
+                                  disabled={
+                                    category.value === 'mood' && values.mood.includes('anyMood')
+                                  }
+                                />
+                              )
+                            }
+                            checked={values[category.value as 'mood' | 'extra'].some(
+                              (v) => v === filter.value
+                            )}
+                            name={category.value}
                             value={filter.value}
                             labelPlacement='top'
                             label={filter.title}
                             key={filter.value}
                           />
                         )
-                      })}
-                    </RadioGroup>
-                  ) : (
-                    category.filters.map((filter) => {
-                      return (
-                        <Field
-                          as={FormControlLabel}
-                          control={
-                            filter.value === 'anyMood' ? (
-                              <Checkbox
-                                onChange={() => {
-                                  if (!values.mood.includes('anyMood')) {
-                                    setFieldValue('mood', ['anyMood'])
-                                  } else {
-                                    setFieldValue('mood', [])
-                                  }
-                                }}
-                              />
-                            ) : (
-                              <Checkbox
-                                disabled={category.value === 'mood' && values.mood.includes('anyMood')}
-                              />
-                            )
-                          }
-                          checked={values[category.value as 'mood' | 'extra'].some(
-                            (v) => v === filter.value
-                          )}
-                          name={category.value}
-                          value={filter.value}
-                          labelPlacement='top'
-                          label={filter.title}
-                          key={filter.value}
-                        />
-                      )
-                    })
-                  )}
-                </FilterCategoryContainer>
-              )
-            })}
-            <Button type='submit'>Submit</Button>
-          </Form>
-        )
-      }}
-    </Formik>
+                      })
+                    )}
+                  </FilterCategoryContainer>
+                )
+              })}
+              <Button type='submit'>Submit</Button>
+            </Form>
+          )
+        }}
+      </Formik>
+    </FiltersContainer>
   )
 }

@@ -27,17 +27,13 @@ const Divider = styled.hr`
   border-color: rgba(0, 0, 0, 0.12);
 `
 
-const FiltersContainer = styled.div``
-
 export const ChooseFilters: FC = (): JSX.Element => {
   return (
     <ChooseFiltersPageContainer>
       <SongFiltersBox>
         <SongFiltersTitle>Выберите, какую песню хотите услышать</SongFiltersTitle>
         <Divider />
-        <FiltersContainer>
-          <TrackFilters />
-        </FiltersContainer>
+        <TrackFilters />
       </SongFiltersBox>
       <ChooseAlbums />
     </ChooseFiltersPageContainer>
