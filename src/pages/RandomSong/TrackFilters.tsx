@@ -4,7 +4,7 @@ import { Field, Form } from 'formik'
 import { Button, Checkbox, Radio, RadioGroup } from '@material-ui/core'
 import { useStore } from '../../stores/RootStore/RootStoreContext'
 import { FormControlLabel } from '@material-ui/core'
-import { IFormValues } from './ChooseFilters'
+import { IFormValues } from './AllFilters'
 import { FilterValues } from '../../stores/TracksStore'
 
 interface TrackFiltersProps {

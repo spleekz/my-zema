@@ -3,7 +3,7 @@ import { Checkbox } from '@material-ui/core'
 import { observer } from 'mobx-react-lite'
 import styled from 'styled-components'
 import { useStore } from '../../stores/RootStore/RootStoreContext'
-import { IFormValues } from './ChooseFilters'
+import { IFormValues } from './AllFilters'
 import { Field } from 'formik'
 
 interface ChooseAlbumsProps {

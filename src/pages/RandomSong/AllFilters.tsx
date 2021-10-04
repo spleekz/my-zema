@@ -13,7 +13,7 @@ export interface IFormValues {
   albums: Array<number>
 }
 
-const ChooseFiltersPageContainer = styled.div`
+const AllFiltersPageContainer = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 40px;
@@ -37,7 +37,7 @@ const Divider = styled.hr`
   border-color: rgba(0, 0, 0, 0.12);
 `
 
-export const ChooseFilters: FC = (): JSX.Element => {
+export const AllFilters: FC = (): JSX.Element => {
   const { TracksStore } = useStore()
 
   const initialFormValues: IFormValues = {
@@ -55,7 +55,7 @@ export const ChooseFilters: FC = (): JSX.Element => {
   }
 
   return (
-    <ChooseFiltersPageContainer>
+    <AllFiltersPageContainer>
       <Formik initialValues={initialFormValues} onSubmit={handleSubmit} enableReinitialize>
         {({ values, setFieldValue }) => {
           return (
@@ -70,6 +70,6 @@ export const ChooseFilters: FC = (): JSX.Element => {
           )
         }}
       </Formik>
-    </ChooseFiltersPageContainer>
+    </AllFiltersPageContainer>
   )
 }

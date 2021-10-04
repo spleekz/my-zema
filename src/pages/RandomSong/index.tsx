@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { observer } from 'mobx-react-lite'
 import { useStore } from '../../stores/RootStore/RootStoreContext'
 import { YourSong } from './YourSong'
-import { ChooseFilters } from './ChooseFilters'
+import { AllFilters } from './AllFilters'
 
 const RandomSongpageWrapper = styled.div`
   display: flex;
@@ -15,7 +15,7 @@ export const RandomSongPage: FC = observer((): JSX.Element => {
 
   return (
     <RandomSongpageWrapper>
-      {TracksStore.yourTrack ? <YourSong /> : <ChooseFilters />}
+      {TracksStore.yourTrack ? <YourSong /> : <AllFilters />}
     </RandomSongpageWrapper>
   )
 })
