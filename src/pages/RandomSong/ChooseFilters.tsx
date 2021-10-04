@@ -9,7 +9,7 @@ interface AlbumContainerProps {
   index: number
 }
 
-const ChooseSongPageContainer = styled.div`
+const ChooseFiltersPageContainer = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 40px;
@@ -54,10 +54,11 @@ const AlbumPreview = styled.img`
   border-radius: 3px;
 `
 
-export const ChooseSong: FC = observer((): JSX.Element => {
+export const ChooseFilters: FC = observer((): JSX.Element => {
   const { TracksStore } = useStore()
+
   return (
-    <ChooseSongPageContainer>
+    <ChooseFiltersPageContainer>
       <SongFiltersBox>
         <SongFiltersTitle>Выберите, какую песню хотите услышать</SongFiltersTitle>
         <Divider />
@@ -77,6 +78,6 @@ export const ChooseSong: FC = observer((): JSX.Element => {
             )
           })}
       </AlbumsFiltersBox>
-    </ChooseSongPageContainer>
+    </ChooseFiltersPageContainer>
   )
 })
