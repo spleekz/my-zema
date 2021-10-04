@@ -10,6 +10,7 @@ export interface IFormValues {
   mood: Array<FilterValues>
   extra: Array<FilterValues>
   tempo: FilterValues
+  albums: Array<number>
 }
 
 const ChooseFiltersPageContainer = styled.div`
@@ -43,6 +44,7 @@ export const ChooseFilters: FC = (): JSX.Element => {
     mood: [],
     extra: [],
     tempo: 'anyTempo',
+    albums: [],
   }
   const handleSubmit = (values: IFormValues) => {
     const formData: Array<FilterValues> = [...values.mood, ...values.extra, values.tempo].filter(
@@ -63,7 +65,7 @@ export const ChooseFilters: FC = (): JSX.Element => {
                 <Divider />
                 <TrackFilters values={values} setFieldValue={setFieldValue} />
               </SongFiltersBox>
-              <ChooseAlbums />
+              <ChooseAlbums values={values} setFieldValue={setFieldValue} />
             </>
           )
         }}
