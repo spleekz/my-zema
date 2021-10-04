@@ -41,7 +41,7 @@ export const ChooseFilters: FC = (): JSX.Element => {
   const { TracksStore } = useStore()
 
   const initialFormValues: IFormValues = {
-    mood: [],
+    mood: ['anyMood'],
     extra: [],
     tempo: 'anyTempo',
     albums: [],
