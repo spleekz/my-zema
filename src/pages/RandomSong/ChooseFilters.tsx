@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React, { FC, useEffect } from 'react'
 import styled from 'styled-components'
 import { Field, Form } from 'formik'
 import { Button, Checkbox, Radio, RadioGroup } from '@material-ui/core'
@@ -30,6 +30,15 @@ const FilterCategoryTitle = styled.div`
 
 export const ChooseFilters: FC<TrackFiltersProps> = ({ values, setFieldValue }): JSX.Element => {
   const { TracksStore } = useStore()
+
+  useEffect(() => {
+    if (values.mood.length > 1 && values.mood.includes('anyMood')) {
+      setFieldValue(
+        'mood',
+        values.mood.filter((m) => m !== 'anyMood')
+      )
+    }
+  }, [values.mood])
 
   return (
     <ChooseFiltersContainer>
@@ -71,9 +80,7 @@ export const ChooseFilters: FC<TrackFiltersProps> = ({ values, setFieldValue }):
                             }}
                           />
                         ) : (
-                          <Checkbox
-                            disabled={category.value === 'mood' && values.mood.includes('anyMood')}
-                          />
+                          <Checkbox />
                         )
                       }
                       checked={values[category.value as 'mood' | 'extra'].some(
