@@ -11,7 +11,7 @@ export interface IFormValues {
   extra: Array<FilterValues>
   tempo: FilterValues
   isAlbums: 'true' | 'false'
-  albums: Array<number>
+  albums: Array<string>
 }
 
 const AllFiltersPageContainer = styled.div`
@@ -52,6 +52,9 @@ export const AllFilters: FC = (): JSX.Element => {
     const formData: Array<FilterValues> = [...values.mood, ...values.extra, values.tempo].filter(
       (filter) => filter !== 'anyTempo' && filter !== 'anyMood'
     )
+    const albums = values.albums.map((al) => {
+      return Number(al)
+    })
 
     TracksStore.getAllowedTracks(formData)
   }
