@@ -101,14 +101,14 @@ export const ChooseFilters: FC<TrackFiltersProps> = ({ values, setFieldValue }):
         <RadioGroup>
           <Field
             as={FormControlLabel}
-            control={<Radio />}
+            control={<Radio checked={values.isAlbums === 'false'} />}
             label={'Любой'}
             name='isAlbums'
             value='false'
           />
           <Field
             as={FormControlLabel}
-            control={<Radio />}
+            control={<Radio checked={values.isAlbums === 'true'} />}
             label={'Уточнить'}
             name='isAlbums'
             value='true'
