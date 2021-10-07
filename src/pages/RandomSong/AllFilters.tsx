@@ -10,6 +10,7 @@ export interface IFormValues {
   mood: Array<FilterValues>
   extra: Array<FilterValues>
   tempo: FilterValues
+  isAlbums: 'true' | 'false'
   albums: Array<number>
 }
 
@@ -44,6 +45,7 @@ export const AllFilters: FC = (): JSX.Element => {
     mood: ['anyMood'],
     extra: [],
     tempo: 'anyTempo',
+    isAlbums: 'false',
     albums: [],
   }
   const handleSubmit = (values: IFormValues) => {
@@ -61,11 +63,14 @@ export const AllFilters: FC = (): JSX.Element => {
           return (
             <>
               <SongFiltersBox>
+                <pre>{JSON.stringify(values, null, 2)}</pre>
                 <SongFiltersTitle>Выберите, какую песню хотите услышать</SongFiltersTitle>
                 <Divider />
                 <ChooseFilters values={values} setFieldValue={setFieldValue} />
               </SongFiltersBox>
-              <ChooseAlbums values={values} setFieldValue={setFieldValue} />
+              {values.isAlbums === 'true' && (
+                <ChooseAlbums values={values} setFieldValue={setFieldValue} />
+              )}
             </>
           )
         }}
