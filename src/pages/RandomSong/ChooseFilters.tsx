@@ -98,6 +98,22 @@ export const ChooseFilters: FC<TrackFiltersProps> = ({ values, setFieldValue }):
             </FilterCategoryContainer>
           )
         })}
+        <RadioGroup>
+          <Field
+            as={FormControlLabel}
+            control={<Radio />}
+            label={'Любой'}
+            name='isAlbums'
+            value='false'
+          />
+          <Field
+            as={FormControlLabel}
+            control={<Radio />}
+            label={'Уточнить'}
+            name='isAlbums'
+            value='true'
+          />
+        </RadioGroup>
         <Button type='submit'>Submit</Button>
       </Form>
     </ChooseFiltersContainer>
