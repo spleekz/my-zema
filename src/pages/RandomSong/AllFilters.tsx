@@ -56,7 +56,7 @@ export const AllFilters: FC = (): JSX.Element => {
       return Number(al)
     })
 
-    TracksStore.getAllowedTracks(formData)
+    TracksStore.getAllowedTracks(formData, albums)
   }
 
   return (
@@ -66,7 +66,6 @@ export const AllFilters: FC = (): JSX.Element => {
           return (
             <>
               <SongFiltersBox>
-                <pre>{JSON.stringify(values, null, 2)}</pre>
                 <SongFiltersTitle>Выберите, какую песню хотите услышать</SongFiltersTitle>
                 <Divider />
                 <ChooseFilters values={values} setFieldValue={setFieldValue} />
