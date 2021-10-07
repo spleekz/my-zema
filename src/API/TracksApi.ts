@@ -116,6 +116,7 @@ export interface IAlbum {
 export interface ITrack {
   albumName: string
   albumImage: string
+  albumId: number
   id_track: Tracks
   track: string
 }
@@ -128,6 +129,7 @@ interface IAlbumTracksResponse {
   result: {
     album: string
     cover: string
+    id_album: number
     tracks: Array<ITrack>
   }
 }
@@ -159,11 +161,12 @@ export const TracksApi: ITracksApi = {
       )
       .then((res) => {
         const resData = leaveKeysInObject(res.data, ['result'])
-        resData.result = leaveKeysInObject(res.data.result, ['tracks', 'album', 'cover'])
+        resData.result = leaveKeysInObject(res.data.result, ['tracks', 'album', 'cover', 'id_album'])
         resData.result.tracks = resData.result.tracks.map((track) => {
+          track.albumId = resData.result.id_album
           track.albumName = resData.result.album
           track.albumImage = resData.result.cover
-          return leaveKeysInObject(track, ['id_track', 'track', 'albumName', 'albumImage'])
+          return leaveKeysInObject(track, ['id_track', 'track', 'albumName', 'albumImage', 'albumId'])
         })
         return resData.result.tracks
       })
