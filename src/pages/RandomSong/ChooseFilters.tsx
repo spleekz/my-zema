@@ -16,9 +16,11 @@ interface TrackFiltersProps {
   ) => void
 }
 
-const ChooseFiltersContainer = styled.div``
+const ChooseFiltersContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+`
 const FilterCategoryContainer = styled.div`
-  display: inline-block;
   margin: 7px;
 `
 const FilterCategoryTitle = styled.div`
@@ -26,6 +28,10 @@ const FilterCategoryTitle = styled.div`
   font-weight: bold;
   text-align: left;
   margin-bottom: 13px;
+`
+const FieldsContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
 `
 
 export const ChooseFilters: FC<TrackFiltersProps> = ({ values, setFieldValue }): JSX.Element => {
@@ -47,54 +53,62 @@ export const ChooseFilters: FC<TrackFiltersProps> = ({ values, setFieldValue }):
           return (
             <FilterCategoryContainer key={category.value}>
               <FilterCategoryTitle>{category.name}</FilterCategoryTitle>
-              {category.value === 'tempo' ? (
-                <RadioGroup>
-                  {category.filters.map((filter) => {
+              <FieldsContainer>
+                {category.value === 'tempo' ? (
+                  <RadioGroup
+                    sx={{
+                      width: '100%',
+                      flexDirection: 'row',
+                      justifyContent: 'space-between',
+                    }}
+                  >
+                    {category.filters.map((filter) => {
+                      return (
+                        <Field
+                          as={FormControlLabel}
+                          control={<Radio checked={values.tempo === filter.value} />}
+                          name='tempo'
+                          value={filter.value}
+                          labelPlacement='top'
+                          label={filter.title}
+                          key={filter.value}
+                        />
+                      )
+                    })}
+                  </RadioGroup>
+                ) : (
+                  category.filters.map((filter) => {
                     return (
                       <Field
                         as={FormControlLabel}
-                        control={<Radio checked={values.tempo === filter.value} />}
-                        name='tempo'
+                        control={
+                          filter.value === 'anyMood' ? (
+                            <Checkbox
+                              onChange={() => {
+                                if (!values.mood.includes('anyMood')) {
+                                  setFieldValue('mood', ['anyMood'])
+                                } else {
+                                  setFieldValue('mood', [])
+                                }
+                              }}
+                            />
+                          ) : (
+                            <Checkbox />
+                          )
+                        }
+                        checked={values[category.value as 'mood' | 'extra'].some(
+                          (v) => v === filter.value
+                        )}
+                        name={category.value}
                         value={filter.value}
                         labelPlacement='top'
                         label={filter.title}
                         key={filter.value}
                       />
                     )
-                  })}
-                </RadioGroup>
-              ) : (
-                category.filters.map((filter) => {
-                  return (
-                    <Field
-                      as={FormControlLabel}
-                      control={
-                        filter.value === 'anyMood' ? (
-                          <Checkbox
-                            onChange={() => {
-                              if (!values.mood.includes('anyMood')) {
-                                setFieldValue('mood', ['anyMood'])
-                              } else {
-                                setFieldValue('mood', [])
-                              }
-                            }}
-                          />
-                        ) : (
-                          <Checkbox />
-                        )
-                      }
-                      checked={values[category.value as 'mood' | 'extra'].some(
-                        (v) => v === filter.value
-                      )}
-                      name={category.value}
-                      value={filter.value}
-                      labelPlacement='top'
-                      label={filter.title}
-                      key={filter.value}
-                    />
-                  )
-                })
-              )}
+                  })
+                )}
+              </FieldsContainer>
             </FilterCategoryContainer>
           )
         })}
