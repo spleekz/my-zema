@@ -62,13 +62,17 @@ export const AllFilters: FC = (): JSX.Element => {
   return (
     <AllFiltersPageContainer>
       <Formik initialValues={initialFormValues} onSubmit={handleSubmit} enableReinitialize>
-        {({ values, setFieldValue }) => {
+        {({ values, setFieldValue, handleChange }) => {
           return (
             <>
               <SongFiltersBox>
                 <SongFiltersTitle>Выберите, какую песню хотите услышать</SongFiltersTitle>
                 <Divider />
-                <ChooseFilters values={values} setFieldValue={setFieldValue} />
+                <ChooseFilters
+                  values={values}
+                  setFieldValue={setFieldValue}
+                  handleChange={handleChange}
+                />
               </SongFiltersBox>
               {values.isAlbums === 'true' && (
                 <ChooseAlbums values={values} setFieldValue={setFieldValue} />

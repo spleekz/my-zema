@@ -14,6 +14,7 @@ interface TrackFiltersProps {
     value: Array<FilterValues>,
     shouldValidate?: boolean | undefined
   ) => void
+  handleChange(e: React.ChangeEvent<HTMLInputElement>): void
 }
 
 const ChooseFiltersContainer = styled.div`
@@ -34,7 +35,11 @@ const FieldsContainer = styled.div`
   justify-content: space-between;
 `
 
-export const ChooseFilters: FC<TrackFiltersProps> = ({ values, setFieldValue }): JSX.Element => {
+export const ChooseFilters: FC<TrackFiltersProps> = ({
+  values,
+  setFieldValue,
+  handleChange,
+}): JSX.Element => {
   const { TracksStore } = useStore()
 
   useEffect(() => {
@@ -115,7 +120,15 @@ export const ChooseFilters: FC<TrackFiltersProps> = ({ values, setFieldValue }):
         <RadioGroup>
           <Field
             as={FormControlLabel}
-            control={<Radio checked={values.isAlbums === 'false'} />}
+            control={
+              <Radio
+                checked={values.isAlbums === 'false'}
+                onChange={(e) => {
+                  handleChange(e)
+                  setFieldValue('albums', [])
+                }}
+              />
+            }
             label={'Любой'}
             name='isAlbums'
             value='false'
