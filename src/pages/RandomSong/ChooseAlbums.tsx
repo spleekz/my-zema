@@ -33,7 +33,7 @@ const AlbumsFiltersBox = styled.div`
 `
 const AlbumPreview = styled.img`
   width: 100px;
-  border-radius: 3px;
+  border-radius: 1.5px;
 `
 export const ChooseAlbums: FC<ChooseAlbumsProps> = observer(
   ({ values, setFieldValue }): JSX.Element => {
