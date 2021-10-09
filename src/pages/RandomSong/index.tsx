@@ -8,6 +8,7 @@ import { AllFilters } from './AllFilters'
 const RandomSongpageWrapper = styled.div`
   display: flex;
   justify-content: center;
+  flex: 1 0 auto;
 `
 
 export const RandomSongPage: FC = observer((): JSX.Element => {
