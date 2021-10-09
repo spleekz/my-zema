@@ -48,6 +48,8 @@ export const ChooseFilters: FC<TrackFiltersProps> = ({
         'mood',
         values.mood.filter((m) => m !== 'anyMood')
       )
+    } else if (values.mood.length === 0) {
+      setFieldValue('mood', ['anyMood'])
     }
   }, [values.mood])
 
