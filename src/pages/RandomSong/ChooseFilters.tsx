@@ -117,30 +117,38 @@ export const ChooseFilters: FC<TrackFiltersProps> = ({
             </FilterCategoryContainer>
           )
         })}
-        <RadioGroup>
-          <Field
-            as={FormControlLabel}
-            control={
-              <Radio
-                checked={values.isAlbums === 'false'}
-                onChange={(e) => {
-                  handleChange(e)
-                  setFieldValue('albums', [])
-                }}
-              />
-            }
-            label={'Любой'}
-            name='isAlbums'
-            value='false'
-          />
-          <Field
-            as={FormControlLabel}
-            control={<Radio checked={values.isAlbums === 'true'} />}
-            label={'Уточнить'}
-            name='isAlbums'
-            value='true'
-          />
-        </RadioGroup>
+        <FilterCategoryContainer>
+          <FilterCategoryTitle>Альбом</FilterCategoryTitle>
+          <RadioGroup
+            sx={{
+              width: '100%',
+              flexDirection: 'row',
+            }}
+          >
+            <Field
+              as={FormControlLabel}
+              control={
+                <Radio
+                  checked={values.isAlbums === 'false'}
+                  onChange={(e) => {
+                    handleChange(e)
+                    setFieldValue('albums', [])
+                  }}
+                />
+              }
+              label='Любой'
+              name='isAlbums'
+              value='false'
+            />
+            <Field
+              as={FormControlLabel}
+              control={<Radio checked={values.isAlbums === 'true'} />}
+              label='Уточнить'
+              name='isAlbums'
+              value='true'
+            />
+          </RadioGroup>
+        </FilterCategoryContainer>
         <Button type='submit'>Submit</Button>
       </Form>
     </ChooseFiltersContainer>
