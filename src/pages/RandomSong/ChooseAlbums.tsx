@@ -3,13 +3,7 @@ import { Checkbox } from '@material-ui/core'
 import { observer } from 'mobx-react-lite'
 import styled from 'styled-components'
 import { useStore } from '../../stores/RootStore/RootStoreContext'
-import { IFormValues } from './AllFilters'
 import { Field } from 'formik'
-
-interface ChooseAlbumsProps {
-  values: IFormValues
-  setFieldValue: (field: string, value: Array<number>, shouldValidate?: boolean | undefined) => void
-}
 
 interface AlbumContainerProps {
   index: number
@@ -35,23 +29,21 @@ const AlbumPreview = styled.img`
   width: 100px;
   border-radius: 1.5px;
 `
-export const ChooseAlbums: FC<ChooseAlbumsProps> = observer(
-  ({ values, setFieldValue }): JSX.Element => {
-    const { TracksStore } = useStore()
+export const ChooseAlbums: FC = observer((): JSX.Element => {
+  const { TracksStore } = useStore()
 
-    return (
-      <AlbumsFiltersBox>
-        {TracksStore.albums
-          .filter((al) => al.id_album !== 814405)
-          .map((album, index) => {
-            return (
-              <AlbumContainer key={album.id_album} index={index}>
-                <Field as={Checkbox} name='albums' value={album.id_album} />
-                <AlbumPreview src={album.cover} />
-              </AlbumContainer>
-            )
-          })}
-      </AlbumsFiltersBox>
-    )
-  }
-)
+  return (
+    <AlbumsFiltersBox>
+      {TracksStore.albums
+        .filter((al) => al.id_album !== 814405)
+        .map((album, index) => {
+          return (
+            <AlbumContainer key={album.id_album} index={index}>
+              <Field as={Checkbox} name='albums' value={album.id_album} />
+              <AlbumPreview src={album.cover} />
+            </AlbumContainer>
+          )
+        })}
+    </AlbumsFiltersBox>
+  )
+})

@@ -74,9 +74,7 @@ export const AllFilters: FC = (): JSX.Element => {
                   handleChange={handleChange}
                 />
               </SongFiltersBox>
-              {values.isAlbums === 'true' && (
-                <ChooseAlbums values={values} setFieldValue={setFieldValue} />
-              )}
+              {values.isAlbums === 'true' && <ChooseAlbums />}
             </>
           )
         }}
