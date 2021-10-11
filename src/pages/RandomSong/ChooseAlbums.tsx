@@ -25,9 +25,14 @@ const AlbumsFiltersBox = styled.div`
   box-shadow: 0 5px 15px rgb(0 0 0 / 8%);
   margin-left: 8px;
 `
-const AlbumPreview = styled.img`
+const AlbumPreview = styled.div<{ imageSrc: string }>`
   width: 100px;
+  height: 100px;
   border-radius: 1.5px;
+  background-image: ${(props) => `url(${props.imageSrc})`};
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 `
 export const ChooseAlbums: FC = observer((): JSX.Element => {
   const { TracksStore } = useStore()
@@ -40,7 +45,7 @@ export const ChooseAlbums: FC = observer((): JSX.Element => {
           return (
             <AlbumContainer key={album.id_album} index={index}>
               <Field as={Checkbox} name='albums' value={album.id_album} />
-              <AlbumPreview src={album.cover} />
+              <AlbumPreview imageSrc={album.cover} />
             </AlbumContainer>
           )
         })}
