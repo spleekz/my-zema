@@ -20,6 +20,7 @@ const YourSongName = styled.div`
 `
 const YourSongAlbumName = styled.div`
   margin: -1px 0 0 2px;
+  font-size: 19px;
   color: #4b4b4bb3;
 `
 
