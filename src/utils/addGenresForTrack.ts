@@ -12,13 +12,13 @@ export const addGenresForTracks = (track: ITrack): ITrackWithGenres => {
   const id = track.id_track
 
   if (id === Tracks.ARIVEDERCHI) {
-    genres = ['popular', 'drama', 'medium', 'words', 'makeCalm']
+    genres = ['popular', 'drama', 'medium', 'words', 'makeCalm', 'energetic']
   } else if (id === Tracks.AVSTRALIA_LIVE) {
     genres = ['live', 'dream', 'slow']
   } else if (id === Tracks.BEZ_SHANSOV) {
     genres = ['energetic', 'medium', 'words']
   } else if (id === Tracks.BLYZ) {
-    genres = ['slow', 'drama', 'melody', 'makeCalm']
+    genres = ['slow', 'drama', 'energetic', 'melody', 'makeCalm']
   } else if (id === Tracks.BLYZ_LIVE) {
     genres = ['slow', 'drama', 'melody', 'makeCalm', 'live']
   } else if (id === Tracks.BRIZGI_LIVE) {
@@ -32,13 +32,13 @@ export const addGenresForTracks = (track: ITrack): ITrackWithGenres => {
   } else if (id === Tracks.DENGI_LIVE) {
     genres = ['lite', 'medium', 'words', 'live']
   } else if (id === Tracks.DISHI) {
-    genres = ['lite', 'slow', 'happy']
+    genres = ['lite', 'slow', 'makeCalm']
   } else if (id === Tracks.DOKAZANO) {
     genres = ['happy', 'fast', 'words', 'makeCalm', 'lite']
   } else if (id === Tracks.DOM) {
     genres = ['lite', 'happy', 'dream', 'slow']
   } else if (id === Tracks.DRYG) {
-    genres = ['sad', 'drama', 'slow']
+    genres = ['sad', 'drama', 'slow', 'melody']
   } else if (id === Tracks.DSHOZEF) {
     genres = ['drama', 'slow', 'melody']
   } else if (id === Tracks.ESLI_BI) {
@@ -72,13 +72,13 @@ export const addGenresForTracks = (track: ITrack): ITrackWithGenres => {
   } else if (id === Tracks.JIM_BEAM) {
     genres = ['lite', 'slow']
   } else if (id === Tracks.KOFEVINO) {
-    genres = ['happy', 'drama', 'medium', 'words', 'makeCalm']
+    genres = ['drama', 'medium', 'words', 'makeCalm']
   } else if (id === Tracks.KOFEVINO_LIVE) {
-    genres = ['happy', 'drama', 'medium', 'words', 'makeCalm', 'live']
+    genres = ['drama', 'medium', 'words', 'makeCalm', 'live']
   } else if (id === Tracks.KOGDA_SNEG_NACHNETSYA) {
     genres = ['drama', 'energetic', 'slow']
   } else if (id === Tracks.KRASOTA) {
-    genres = ['sad', 'drama', 'dream', 'slow']
+    genres = ['sad', 'drama', 'melody', 'slow']
   } else if (id === Tracks.KTO) {
     genres = ['happy', 'lite', 'fast']
   } else if (id === Tracks.KYVIROK) {
@@ -88,7 +88,7 @@ export const addGenresForTracks = (track: ITrack): ITrackWithGenres => {
   } else if (id === Tracks.LAMPOCHKI) {
     genres = ['popular', 'dream', 'slow', 'words', 'melody', 'makeCalm', 'lite', 'live']
   } else if (id === Tracks.LKSS_LIVE) {
-    genres = ['energetic', 'slow', 'words', 'melody', 'live']
+    genres = ['energetic', 'drama', 'slow', 'words', 'melody', 'live']
   } else if (id === Tracks.LONDON) {
     genres = ['popular', 'dream', 'slow', 'makeCalm']
   } else if (id === Tracks.MACHO) {
@@ -100,7 +100,7 @@ export const addGenresForTracks = (track: ITrack): ITrackWithGenres => {
   } else if (id === Tracks.MALCHIK) {
     genres = ['energetic', 'medium', 'words']
   } else if (id === Tracks.MALISH) {
-    genres = ['energetic', 'drama', 'medium', 'melody']
+    genres = ['energetic', 'drama', 'medium', 'melody', 'lite']
   } else if (id === Tracks.MECHTOY) {
     genres = ['drama', 'dream', 'medium', 'melody']
   } else if (id === Tracks.MINUS_STO_SOROK) {
@@ -126,7 +126,7 @@ export const addGenresForTracks = (track: ITrack): ITrackWithGenres => {
   } else if (id === Tracks.PARANOJYA) {
     genres = ['dream', 'words', 'melody', 'medium', 'makeCalm']
   } else if (id === Tracks.PESNYA) {
-    genres = ['dream', 'sad', 'drama', 'melody']
+    genres = ['dream', 'sad', 'drama', 'melody', 'slow']
   } else if (id === Tracks.PMML) {
     genres = ['popular', 'medium', 'drama', 'dream', 'words', 'melody']
   } else if (id === Tracks.PMML_LIVE) {
@@ -136,13 +136,13 @@ export const addGenresForTracks = (track: ITrack): ITrackWithGenres => {
   } else if (id === Tracks.POHORONILA) {
     genres = ['sad', 'slow', 'melody']
   } else if (id === Tracks.POVESITSYA) {
-    genres = ['energetic', 'medium', 'words']
+    genres = ['happy', 'energetic', 'medium', 'words']
   } else if (id === Tracks.PRIPEVOCHKA) {
     genres = ['happy', 'fast', 'medium', 'lite']
   } else if (id === Tracks.PROGYLKA) {
-    genres = ['popular', 'medium', 'dream', 'words', 'melody', 'makeCalm']
+    genres = ['popular', 'medium', 'dream', 'energetic', 'words', 'melody', 'makeCalm']
   } else if (id === Tracks.PROGYLKA_LIVE) {
-    genres = ['popular', 'medium', 'dream', 'words', 'melody', 'makeCalm']
+    genres = ['popular', 'medium', 'dream', 'energetic', 'words', 'melody', 'makeCalm']
   } else if (id === Tracks.RAKETI) {
     genres = ['energetic', 'fast']
   } else if (id === Tracks.RASSVETI) {
@@ -164,7 +164,7 @@ export const addGenresForTracks = (track: ITrack): ITrackWithGenres => {
   } else if (id === Tracks.SHKALYAT_DATCHIKI) {
     genres = ['energetic', 'medium']
   } else if (id === Tracks.SIGARETI) {
-    genres = ['drama', 'dream', 'slow']
+    genres = ['drama', 'dream', 'sad', 'slow']
   } else if (id === Tracks.SINOPTIK) {
     genres = ['energetic', 'lite', 'medium', 'words']
   } else if (id === Tracks.SKANDAL) {
@@ -172,7 +172,7 @@ export const addGenresForTracks = (track: ITrack): ITrackWithGenres => {
   } else if (id === Tracks.SKANDAL_LIVE) {
     genres = ['energetic', 'fast', 'live']
   } else if (id === Tracks.SKAZKI) {
-    genres = ['drama', 'dream', 'slow', 'words', 'melody', 'makeCalm']
+    genres = ['drama', 'dream', 'lite', 'slow', 'words', 'melody', 'makeCalm']
   } else if (id === Tracks.SNEG) {
     genres = ['energetic', 'medium']
   } else if (id === Tracks.SOZRELA) {
@@ -182,13 +182,13 @@ export const addGenresForTracks = (track: ITrack): ITrackWithGenres => {
   } else if (id === Tracks.SPASIBO_LIVE) {
     genres = ['dream', 'slow', 'melody', 'live']
   } else if (id === Tracks.SPID) {
-    genres = ['popular', 'happy', 'dream', 'medium', 'words', 'melody', 'makeCalm']
+    genres = ['popular', 'happy', 'medium', 'words', 'makeCalm']
   } else if (id === Tracks.TAK_I_OSTAVIM) {
     genres = ['drama', 'dream', 'slow', 'melody']
   } else if (id === Tracks.TISICHYA_LET) {
     genres = ['sad', 'drama', 'energetic', 'slow', 'melody']
   } else if (id === Tracks.TRAFIK) {
-    genres = ['energetic', 'drama', 'medium', 'words', 'melody']
+    genres = ['energetic', 'drama', 'medium', 'melody']
   } else if (id === Tracks.VOSKRESENYE) {
     genres = ['happy', 'energetic', 'medium']
   } else if (id === Tracks.VOZMI_MENYA) {
@@ -208,13 +208,13 @@ export const addGenresForTracks = (track: ITrack): ITrackWithGenres => {
   } else if (id === Tracks.ZEMFIRA) {
     genres = ['drama', 'slow', 'makeCalm']
   } else if (id === Tracks.ZERO) {
-    genres = ['lite', 'slow', 'makeCalm']
+    genres = ['happy', 'lite', 'slow', 'makeCalm']
   } else if (id === Tracks.ZHIT_V_TVOEJ_GOLOVE) {
     genres = ['drama', 'slow']
   } else if (id === Tracks.ZHIT_V_TVOEJ_GOLOVE_LIVE) {
     genres = ['drama', 'slow', 'live']
   } else if (id === Tracks.ZHYZHA) {
-    genres = ['drama', 'dream', 'slow', 'melody', 'makeCalm']
+    genres = ['drama', 'dream', 'sad', 'slow', 'melody', 'makeCalm']
   } else if (id === Tracks.ZNAK_BESKONECHNOST) {
     genres = ['popular', 'drama', 'dream', 'energetic', 'slow', 'words', 'melody', 'makeCalm']
   } else if (id === Tracks.ZNAK_BESKONECHNOST_LIVE) {
