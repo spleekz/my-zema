@@ -3,7 +3,6 @@ import styled from 'styled-components'
 
 const HeaderContainer = styled.div`
   padding: 10px 40px;
-  background-color: #ffffff;
 `
 const HeaderTitle = styled.div`
   font-size: 40px;
