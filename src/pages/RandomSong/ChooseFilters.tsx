@@ -22,7 +22,7 @@ const ChooseFiltersContainer = styled.div`
   flex-direction: column;
 `
 const FilterCategoryContainer = styled.div`
-  margin: 7px;
+  margin: 16px 0;
 `
 const FilterCategoryTitle = styled.div`
   font-size: 31px;
