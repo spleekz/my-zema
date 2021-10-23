@@ -9,11 +9,6 @@ interface AlbumContainerProps {
   index: number
 }
 
-const AlbumContainer = styled.div<AlbumContainerProps>`
-  display: flex;
-  flex-direction: ${(props) => (props.index % 2 === 0 ? 'row-reverse' : 'row')};
-  justify-content: space-between;
-`
 const AlbumsFiltersBox = styled.div`
   display: flex;
   flex-direction: column;
@@ -24,6 +19,12 @@ const AlbumsFiltersBox = styled.div`
   border-radius: 6px;
   box-shadow: 0 5px 15px rgb(0 0 0 / 8%);
   margin-left: 8px;
+  overflow-y: scroll;
+`
+const AlbumContainer = styled.div<AlbumContainerProps>`
+  display: flex;
+  flex-direction: ${(props) => (props.index % 2 === 0 ? 'row-reverse' : 'row')};
+  justify-content: space-between;
 `
 const AlbumPreview = styled.div<{ imageSrc: string }>`
   width: 100px;
@@ -39,16 +40,14 @@ export const ChooseAlbums: FC = observer((): JSX.Element => {
 
   return (
     <AlbumsFiltersBox>
-      {TracksStore.albums
-        .filter((al) => al.id_album !== 814405)
-        .map((album, index) => {
-          return (
-            <AlbumContainer key={album.id_album} index={index}>
-              <Field as={Checkbox} name='albums' value={album.id_album} />
-              <AlbumPreview imageSrc={album.cover} />
-            </AlbumContainer>
-          )
-        })}
+      {TracksStore.albums.map((album, index) => {
+        return (
+          <AlbumContainer key={album.id} index={index}>
+            <Field as={Checkbox} name='albums' value={album.id} />
+            <AlbumPreview imageSrc={album.images[0].url} />
+          </AlbumContainer>
+        )
+      })}
     </AlbumsFiltersBox>
   )
 })

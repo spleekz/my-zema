@@ -52,13 +52,9 @@ export const AllFilters: FC = (): JSX.Element => {
     const formData: Array<FilterValues> = [...values.mood, ...values.extra, values.tempo].filter(
       (filter) => filter !== 'anyTempo' && filter !== 'anyMood'
     )
-    const albums = values.albums.map((al) => {
-      return Number(al)
-    })
 
-    TracksStore.getAllowedTracks(formData, albums)
+    TracksStore.getAllowedTracks(formData, values.albums)
   }
-
   return (
     <AllFiltersPageContainer>
       <Formik initialValues={initialFormValues} onSubmit={handleSubmit} enableReinitialize>

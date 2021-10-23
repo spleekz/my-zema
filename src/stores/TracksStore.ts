@@ -19,7 +19,6 @@ export type FilterValues =
   | 'words'
   | 'melody'
   | 'makeCalm'
-  | 'live'
   | 'anyTempo'
   | 'anyMood'
 
@@ -43,9 +42,9 @@ export interface ITracksStore {
   yourTrack: ITrackWithGenres
   setAlbums(albums: Array<IAlbum>): void
   setTracks(tracks: Array<ITrack>): void
-  loadTracks(): void
+  loadTracks(token: string): void
   updateAllowedTracks(track: ITrackWithGenres): void
-  getAllowedTracks(filters: Array<FilterValues>, albums: Array<number>): void
+  getAllowedTracks(filters: Array<FilterValues>, albums: Array<string>): void
 }
 
 export class TracksStore implements ITracksStore {
@@ -88,7 +87,6 @@ export class TracksStore implements ITracksStore {
         { title: 'Запоминающиеся слова', value: 'words' },
         { title: 'Красивая музка', value: 'melody' },
         { title: 'Успокаивает', value: 'makeCalm' },
-        { title: 'Live', value: 'live' },
       ],
     },
   ]
@@ -104,15 +102,16 @@ export class TracksStore implements ITracksStore {
   setAlbums(albums: Array<IAlbum>): void {
     this.albums = albums
   }
-  loadTracks(): void {
+  loadTracks(token: string): void {
+    TracksApi.loadAllAlbums(token)
     const accumAlbums: Array<IAlbum> = []
     const accumTracks: Array<ITrackWithGenres> = []
-    TracksApi.loadAllAlbums().then((albums) => {
+    TracksApi.loadAllAlbums(token).then((albums) => {
       let albumIndex = -1
       albums.forEach((album) => {
         albumIndex++
         accumAlbums.push(album)
-        TracksApi.loadAlbumSongs(album.id_album).then((tracks) => {
+        TracksApi.loadAlbumSongs(album, token).then((tracks) => {
           let trackIndex = -1
           tracks.forEach((track) => {
             trackIndex++
@@ -130,11 +129,11 @@ export class TracksStore implements ITracksStore {
   updateAllowedTracks(track: ITrackWithGenres): void {
     this.allowedTracks.push(track)
   }
-  getAllowedTracks(filters: Array<FilterValues>, albums: Array<number>): void {
+  getAllowedTracks(filters: Array<FilterValues>, albums: Array<string>): void {
     this.tracks.forEach((track) => {
       if (
         arrayIncludes(track.genres, filters) &&
-        (albums.length ? albums.some((al) => al === track.albumId) : true)
+        (albums.length ? albums.some((al) => al === track.album_id) : true)
       ) {
         this.updateAllowedTracks(track)
       }

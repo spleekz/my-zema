@@ -1,6 +1,5 @@
 import React, { FC, useEffect } from 'react'
 import styled from 'styled-components'
-import axios from 'axios'
 import { Header } from './components/Header'
 import { MainPage } from './pages/Main'
 import { Redirect, Route, Switch } from 'react-router'
@@ -9,7 +8,7 @@ import { useStore } from './stores/RootStore/RootStoreContext'
 import { observer } from 'mobx-react-lite'
 import { createGlobalStyle } from 'styled-components'
 
-interface IHashValues {
+export interface IHashValues {
   access_token: string
   expires_in: string
   token_type: string
@@ -33,7 +32,7 @@ const GlobalStyles = createGlobalStyle`
 const SignSpotify = styled.a``
 
 export const App: FC = observer((): JSX.Element => {
-  const { TracksStore } = useStore()
+  const { TracksStore, AuthStore } = useStore()
   const clientId = 'f70e10b60ab646a19c33dd8e3e1d1b72'
 
   const authUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&redirect_uri=http://localhost:3000`
@@ -54,20 +53,16 @@ export const App: FC = observer((): JSX.Element => {
 
   useEffect(() => {
     if (window.location.hash) {
-      const { access_token } = getHashValues(window.location.hash)
-      axios
-        .get(`https://api.spotify.com/v1/artists/6oO3QiWdVj5FZQwbdRtsRh`, {
-          headers: {
-            Authorization: 'Bearer ' + access_token,
-          },
-        })
-        .then((res) => console.log(res.data))
+      const { access_token, expires_in, token_type } = getHashValues(window.location.hash)
+      AuthStore.setAuthValues(access_token, Number(expires_in), token_type)
     }
   }, [window.location.hash])
 
   useEffect(() => {
-    // TracksStore.loadTracks()
-  }, [])
+    if (AuthStore.access_token) {
+      TracksStore.loadTracks(AuthStore.access_token)
+    }
+  }, [AuthStore.access_token])
 
   return (
     <>

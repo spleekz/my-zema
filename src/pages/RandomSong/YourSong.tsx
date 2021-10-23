@@ -37,10 +37,10 @@ export const YourSong: FC = (): JSX.Element => {
   return (
     <YourSongPageContainer>
       <YourSongContainer>
-        <YourSongImage imageSrc={TracksStore.yourTrack.albumImage} />
+        <YourSongImage imageSrc={TracksStore.yourTrack.album_images[0].url} />
         <YourSongInfo>
-          <YourSongName>{TracksStore.yourTrack.track}</YourSongName>
-          <YourSongAlbumName>{TracksStore.yourTrack.albumName}</YourSongAlbumName>
+          <YourSongName>{TracksStore.yourTrack.name}</YourSongName>
+          <YourSongAlbumName>{TracksStore.yourTrack.album_name}</YourSongAlbumName>
         </YourSongInfo>
       </YourSongContainer>
     </YourSongPageContainer>
