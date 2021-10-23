@@ -1,6 +1,7 @@
 import React, { FC } from 'react'
 import styled from 'styled-components'
 import { useStore } from '../../stores/RootStore/RootStoreContext'
+import { makeFirstLetterCapital } from '../../utils/makeFirstLetterCapital'
 
 const YourSongPageContainer = styled.div`
   display: flex;
@@ -39,8 +40,14 @@ export const YourSong: FC = (): JSX.Element => {
       <YourSongContainer>
         <YourSongImage imageSrc={TracksStore.yourTrack.album_images[0].url} />
         <YourSongInfo>
-          <YourSongName>{TracksStore.yourTrack.name}</YourSongName>
-          <YourSongAlbumName>{TracksStore.yourTrack.album_name}</YourSongAlbumName>
+          <YourSongName>
+            {TracksStore.yourTrack.name.includes('.')
+              ? TracksStore.yourTrack.name
+              : makeFirstLetterCapital(TracksStore.yourTrack.name)}
+          </YourSongName>
+          <YourSongAlbumName>
+            {makeFirstLetterCapital(TracksStore.yourTrack.album_name)}
+          </YourSongAlbumName>
         </YourSongInfo>
       </YourSongContainer>
     </YourSongPageContainer>
