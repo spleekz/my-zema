@@ -1,10 +1,10 @@
-import React, { FC } from 'react'
+import React, { FC, useContext } from 'react'
 import styled from 'styled-components'
 import { ChooseFilters } from './ChooseFilters'
 import { ChooseAlbums } from './ChooseAlbums'
 import { Formik } from 'formik'
 import { FilterValues } from '../../stores/TracksStore'
-import { useStore } from '../../stores/RootStore/RootStoreContext'
+import { RandomTrackStoreContext } from '../../stores/RootStore/RootStoreContext'
 
 export interface IFormValues {
   mood: Array<FilterValues>
@@ -39,7 +39,7 @@ const Divider = styled.hr`
 `
 
 export const AllFilters: FC = (): JSX.Element => {
-  const { TracksStore } = useStore()
+  const RandomTrackStore = useContext(RandomTrackStoreContext)
 
   const initialFormValues: IFormValues = {
     mood: ['anyMood'],
@@ -53,8 +53,9 @@ export const AllFilters: FC = (): JSX.Element => {
       (filter) => filter !== 'anyTempo' && filter !== 'anyMood'
     )
 
-    TracksStore.getAllowedTracks(formData, values.albums)
+    RandomTrackStore.getAllowedTracks(formData, values.albums)
   }
+
   return (
     <AllFiltersPageContainer>
       <Formik initialValues={initialFormValues} onSubmit={handleSubmit} enableReinitialize>

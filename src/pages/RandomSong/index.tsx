@@ -1,9 +1,10 @@
-import React, { FC } from 'react'
+import React, { FC, useState } from 'react'
 import styled from 'styled-components'
 import { observer } from 'mobx-react-lite'
-import { useStore } from '../../stores/RootStore/RootStoreContext'
+import { useStore, RandomTrackStoreContext } from '../../stores/RootStore/RootStoreContext'
 import { YourSong } from './YourSong'
 import { AllFilters } from './AllFilters'
+import { IRandomTrackStore } from '../../stores/RandomTrackStore'
 
 const RandomSongpageWrapper = styled.div`
   display: flex;
@@ -12,11 +13,12 @@ const RandomSongpageWrapper = styled.div`
 `
 
 export const RandomSongPage: FC = observer((): JSX.Element => {
-  const { TracksStore } = useStore()
+  const { createRandomTrackStore } = useStore()
+  const [store] = useState<IRandomTrackStore>(createRandomTrackStore)
 
   return (
-    <RandomSongpageWrapper>
-      {TracksStore.yourTrack ? <YourSong /> : <AllFilters />}
-    </RandomSongpageWrapper>
+    <RandomTrackStoreContext.Provider value={store}>
+      <RandomSongpageWrapper>{store.yourTrack ? <YourSong /> : <AllFilters />}</RandomSongpageWrapper>
+    </RandomTrackStoreContext.Provider>
   )
 })

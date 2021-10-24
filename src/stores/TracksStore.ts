@@ -1,8 +1,6 @@
 import { makeAutoObservable } from 'mobx'
 import { ITrack, TracksApi, IAlbum } from '../API/TracksApi'
 import { addGenresForTracks } from '../utils/addGenresForTrack'
-import { arrayIncludes } from '../utils/arrayIncludes'
-import { getRandom } from '../utils/getRandom'
 
 export type CategoryValues = 'mood' | 'tempo' | 'extra'
 export type FilterValues =
@@ -38,13 +36,9 @@ export interface ITracksStore {
   albums: Array<IAlbum>
   tracks: Array<ITrackWithGenres>
   filters: Array<IFilterCategory>
-  allowedTracks: Array<ITrackWithGenres>
-  yourTrack: ITrackWithGenres
   setAlbums(albums: Array<IAlbum>): void
   setTracks(tracks: Array<ITrack>): void
   loadTracks(token: string): void
-  updateAllowedTracks(track: ITrackWithGenres): void
-  getAllowedTracks(filters: Array<FilterValues>, albums: Array<string>): void
 }
 
 export class TracksStore implements ITracksStore {
@@ -54,7 +48,6 @@ export class TracksStore implements ITracksStore {
 
   albums: Array<IAlbum> = []
   tracks: Array<ITrackWithGenres> = []
-  allowedTracks: Array<ITrackWithGenres> = []
   filters: Array<IFilterCategory> = [
     {
       name: 'Настроение',
@@ -91,11 +84,6 @@ export class TracksStore implements ITracksStore {
     },
   ]
 
-  get yourTrack(): ITrackWithGenres {
-    const randomIndex = getRandom(0, this.allowedTracks.length - 1)
-    return this.allowedTracks[randomIndex]
-  }
-
   setTracks(tracks: Array<ITrackWithGenres>): void {
     this.tracks = tracks
   }
@@ -124,19 +112,6 @@ export class TracksStore implements ITracksStore {
           })
         })
       })
-    })
-  }
-  updateAllowedTracks(track: ITrackWithGenres): void {
-    this.allowedTracks.push(track)
-  }
-  getAllowedTracks(filters: Array<FilterValues>, albums: Array<string>): void {
-    this.tracks.forEach((track) => {
-      if (
-        arrayIncludes(track.genres, filters) &&
-        (albums.length ? albums.some((al) => al === track.album_id) : true)
-      ) {
-        this.updateAllowedTracks(track)
-      }
     })
   }
 }

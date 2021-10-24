@@ -1,7 +1,7 @@
-import React, { FC } from 'react'
+import React, { FC, useContext } from 'react'
 import styled from 'styled-components'
-import { useStore } from '../../stores/RootStore/RootStoreContext'
 import { makeFirstLetterCapital } from '../../utils/makeFirstLetterCapital'
+import { RandomTrackStoreContext } from '../../stores/RootStore/RootStoreContext'
 
 const YourSongPageContainer = styled.div`
   display: flex;
@@ -33,20 +33,20 @@ const YourSongAlbumName = styled.div`
 `
 
 export const YourSong: FC = (): JSX.Element => {
-  const { TracksStore } = useStore()
+  const RandomTrackStore = useContext(RandomTrackStoreContext)
 
   return (
     <YourSongPageContainer>
       <YourSongContainer>
-        <YourSongImage imageSrc={TracksStore.yourTrack.album_images[0].url} />
+        <YourSongImage imageSrc={RandomTrackStore.yourTrack.album_images[0].url} />
         <YourSongInfo>
           <YourSongName>
-            {TracksStore.yourTrack.name.includes('.')
-              ? TracksStore.yourTrack.name
-              : makeFirstLetterCapital(TracksStore.yourTrack.name)}
+            {RandomTrackStore.yourTrack.name.includes('.')
+              ? RandomTrackStore.yourTrack.name
+              : makeFirstLetterCapital(RandomTrackStore.yourTrack.name)}
           </YourSongName>
           <YourSongAlbumName>
-            {makeFirstLetterCapital(TracksStore.yourTrack.album_name)}
+            {makeFirstLetterCapital(RandomTrackStore.yourTrack.album_name)}
           </YourSongAlbumName>
         </YourSongInfo>
       </YourSongContainer>
