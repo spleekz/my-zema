@@ -7,7 +7,7 @@ export interface IRootStore {
   AuthStore: IAuthStore
 }
 
-export class RootStore {
+export class RootStore implements IRootStore {
   TracksStore = remotedev(new TracksStore(), { name: 'TracksStore' })
   AuthStore = remotedev(new AuthStore(), { name: 'AuthStore' })
 }
