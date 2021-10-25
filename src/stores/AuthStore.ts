@@ -22,7 +22,7 @@ export class AuthStore implements IAuthStore {
     return 'f70e10b60ab646a19c33dd8e3e1d1b72'
   }
   get authUrl(): string {
-    return `https://accounts.spotify.com/authorize?client_id=${this.clientId}&response_type=token&redirect_uri=http://localhost:3000`
+    return `https://accounts.spotify.com/authorize?client_id=${this.clientId}&response_type=token&redirect_uri=http://localhost:3000&scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20user-read-playback-state%20user-modify-playback-state`
   }
 
   setAuthValues(token: string, time: number, type: string): void {
