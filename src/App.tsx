@@ -19,7 +19,7 @@ const GlobalStyles = createGlobalStyle<{ bodyBgc: string }>`
   body {
     margin:0;
     padding:0;
-    background-image:${(props) => props.bodyBgc};
+    background-color:${(props) => props.bodyBgc};
     font-family: 'Alegreya Sans SC', sans-serif;
     height: 100vh;
     box-sizing:border-box;
