@@ -7,6 +7,7 @@ import { RandomSongPage } from './pages/RandomSong'
 import { useStore } from './stores/RootStore/RootStoreContext'
 import { observer } from 'mobx-react-lite'
 import { createGlobalStyle } from 'styled-components'
+import { getHashValues } from './utils/getHashValues'
 
 export interface IHashValues {
   access_token: string
@@ -33,23 +34,6 @@ const SignSpotify = styled.a``
 
 export const App: FC = observer((): JSX.Element => {
   const { TracksStore, AuthStore } = useStore()
-  const clientId = 'f70e10b60ab646a19c33dd8e3e1d1b72'
-
-  const authUrl = `https://accounts.spotify.com/authorize?client_id=${clientId}&response_type=token&redirect_uri=http://localhost:3000`
-
-  const getHashValues = (hash: string): IHashValues => {
-    const hashString = hash.substring(1)
-    const hashValuesArray = hashString.split('&')
-    const hashValues: IHashValues = hashValuesArray.reduce((acc: IHashValues, current) => {
-      const keyAndValue = current.split('=')
-      const key = keyAndValue[0] as keyof IHashValues
-      const value = keyAndValue[1]
-      acc[key] = value
-      return acc
-    }, {} as IHashValues)
-
-    return hashValues
-  }
 
   useEffect(() => {
     if (window.location.hash) {
@@ -66,7 +50,7 @@ export const App: FC = observer((): JSX.Element => {
 
   return (
     <>
-      <SignSpotify href={authUrl}>Sign in with Spotify</SignSpotify>
+      <SignSpotify href={AuthStore.authUrl}>Sign in with Spotify</SignSpotify>
       <GlobalStyles />
       <Header />
       <Switch>
