@@ -15,11 +15,11 @@ export interface IHashValues {
   token_type: string
 }
 
-const GlobalStyles = createGlobalStyle`
+const GlobalStyles = createGlobalStyle<{ bodyBgc: string }>`
   body {
     margin:0;
     padding:0;
-    background-color: #f3f3f3;
+    background-image:${(props) => props.bodyBgc};
     font-family: 'Alegreya Sans SC', sans-serif;
     height: 100vh;
     box-sizing:border-box;
@@ -33,7 +33,7 @@ const GlobalStyles = createGlobalStyle`
 const SignSpotify = styled.a``
 
 export const App: FC = observer((): JSX.Element => {
-  const { TracksStore, AuthStore } = useStore()
+  const { AppStore, TracksStore, AuthStore } = useStore()
 
   useEffect(() => {
     if (window.location.hash) {
@@ -51,7 +51,7 @@ export const App: FC = observer((): JSX.Element => {
   return (
     <>
       <SignSpotify href={AuthStore.authUrl}>Sign in with Spotify</SignSpotify>
-      <GlobalStyles />
+      <GlobalStyles bodyBgc={AppStore.bodyBgc} />
       <Header />
       <Switch>
         <Route exact path='/' component={MainPage} />
