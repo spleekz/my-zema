@@ -12,13 +12,10 @@ const YourSongPageContainer = styled.div`
 const YourSongContainer = styled.div`
   display: flex;
 `
-const YourSongImage = styled.div<{ imageSrc: string }>`
-  width: 250px;
-  height: 250px;
-  background-image: ${(props) => `url(${props.imageSrc})`};
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+const YourSongImage = styled.img`
+  width: 400px;
+  height: 400px;
+  pointer-events: none;
 `
 const YourSongInfo = styled.div`
   margin: 12px 0 0 8px;
@@ -40,7 +37,7 @@ export const YourSong: FC = (): JSX.Element => {
   return (
     <YourSongPageContainer>
       <YourSongContainer>
-        <YourSongImage imageSrc={RandomTrackStore.yourTrack.album_images[0].url} />
+        <YourSongImage src={RandomTrackStore.yourTrack.album_images[0].url} />
         <YourSongInfo>
           <YourSongName>
             {RandomTrackStore.yourTrack.name.includes('.')
