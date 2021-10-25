@@ -1,7 +1,8 @@
-import React, { FC, useContext } from 'react'
+import React, { FC, useContext, useEffect } from 'react'
 import styled from 'styled-components'
 import { makeFirstLetterCapital } from '../../utils/makeFirstLetterCapital'
 import { RandomTrackStoreContext, useStore } from '../../stores/RootStore/RootStoreContext'
+import { useColor } from 'color-thief-react'
 import SpotifyPlayer from 'react-spotify-web-playback'
 
 const YourSongPageContainer = styled.div`
@@ -31,8 +32,17 @@ const YourSongAlbumName = styled.div`
 `
 
 export const YourSong: FC = (): JSX.Element => {
-  const { AuthStore } = useStore()
+  const { AppStore, AuthStore } = useStore()
   const RandomTrackStore = useContext(RandomTrackStoreContext)
+  const bodyBgc = useColor(RandomTrackStore.yourTrack.album_images[2].url, 'hex', {
+    crossOrigin: 'anonymous',
+  }).data
+
+  useEffect(() => {
+    if (bodyBgc) {
+      AppStore.setBodyBgc(bodyBgc)
+    }
+  }, [bodyBgc])
 
   return (
     <YourSongPageContainer>
