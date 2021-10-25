@@ -1,7 +1,8 @@
 import React, { FC, useContext } from 'react'
 import styled from 'styled-components'
 import { makeFirstLetterCapital } from '../../utils/makeFirstLetterCapital'
-import { RandomTrackStoreContext } from '../../stores/RootStore/RootStoreContext'
+import { RandomTrackStoreContext, useStore } from '../../stores/RootStore/RootStoreContext'
+import SpotifyPlayer from 'react-spotify-web-playback'
 
 const YourSongPageContainer = styled.div`
   display: flex;
@@ -33,6 +34,7 @@ const YourSongAlbumName = styled.div`
 `
 
 export const YourSong: FC = (): JSX.Element => {
+  const { AuthStore } = useStore()
   const RandomTrackStore = useContext(RandomTrackStoreContext)
 
   return (
@@ -50,6 +52,7 @@ export const YourSong: FC = (): JSX.Element => {
           </YourSongAlbumName>
         </YourSongInfo>
       </YourSongContainer>
+      <SpotifyPlayer token={AuthStore.access_token!} uris={[RandomTrackStore.yourTrack.uri]} />
     </YourSongPageContainer>
   )
 }
