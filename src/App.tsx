@@ -15,11 +15,14 @@ export interface IHashValues {
   token_type: string
 }
 
-const GlobalStyles = createGlobalStyle<{ bodyBgc: string }>`
+const GlobalStyles = createGlobalStyle<{ bodyBgc: string; isBodyBgcDark: boolean }>`
   body {
     margin:0;
     padding:0;
-    background-color:${(props) => props.bodyBgc};
+    background:${(props) =>
+      props.isBodyBgcDark
+        ? `radial-gradient(circle at 70% 35%,#f3f3f3 0%,${props.bodyBgc} 130%)`
+        : `radial-gradient(circle at 48% 53%,#f3f3f3 0%,${props.bodyBgc} 70%)`};
     font-family: 'Alegreya Sans SC', sans-serif;
     height: 100vh;
     box-sizing:border-box;
@@ -51,7 +54,7 @@ export const App: FC = observer((): JSX.Element => {
   return (
     <>
       <SignSpotify href={AuthStore.authUrl}>Sign in with Spotify</SignSpotify>
-      <GlobalStyles bodyBgc={AppStore.bodyBgc} />
+      <GlobalStyles bodyBgc={AppStore.bodyBgc} isBodyBgcDark={AppStore.isBodyBgcDark} />
       <Header />
       <Switch>
         <Route exact path='/' component={MainPage} />
