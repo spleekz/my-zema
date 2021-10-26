@@ -7,7 +7,7 @@ const HeaderContainer = styled.div`
 const HeaderTitle = styled.div`
   font-size: 40px;
   font-weight: bold;
-  letter-spacing: 8px;
+  text-align: right;
 `
 
 export const Header: FC = (): JSX.Element => {
