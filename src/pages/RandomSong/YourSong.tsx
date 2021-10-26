@@ -1,5 +1,5 @@
 import React, { FC, useContext, useEffect } from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import { makeFirstLetterCapital } from '../../utils/makeFirstLetterCapital'
 import { RandomTrackStoreContext, useStore } from '../../stores/RootStore/RootStoreContext'
 import { useColor } from 'color-thief-react'
@@ -21,9 +21,33 @@ const YourSongImage = styled.img`
 const YourSongInfo = styled.div`
   margin: 12px 0 0 8px;
 `
-const YourSongName = styled.div`
-  font-size: 40px;
+const YourSongName = styled.div<{ explicit: boolean }>`
+  display: flex;
+  align-items: center;
+  font-size: 48px;
   font-weight: bold;
+  ${(props) =>
+    props.explicit &&
+    css`
+      &:after {
+        content: 'e';
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 28px;
+        height: 28px;
+        position: relative;
+        top: 4px;
+        left: 0px;
+        color: #eeeeee;
+        background-color: #b1b1b1;
+        font-size: 19px;
+  font-weight: bold;
+        text-transform: uppercase;
+        margin: 0 0 0 5px;
+        padding: 1px;
+      }
+    `}
 `
 const YourSongAlbumName = styled.div`
   margin: -1px 0 0 2px;
@@ -49,7 +73,7 @@ export const YourSong: FC = (): JSX.Element => {
       <YourSongContainer>
         <YourSongImage src={RandomTrackStore.yourTrack.album_images[0].url} />
         <YourSongInfo>
-          <YourSongName>
+            <YourSongName explicit={RandomTrackStore.yourTrack.explicit}>
             {RandomTrackStore.yourTrack.name.includes('.')
               ? RandomTrackStore.yourTrack.name
               : makeFirstLetterCapital(RandomTrackStore.yourTrack.name)}
