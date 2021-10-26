@@ -21,7 +21,7 @@ const GlobalStyles = createGlobalStyle<{ bodyBgc: string; isBodyBgcDark: boolean
     padding:0;
     background:${(props) =>
       props.isBodyBgcDark
-        ? `radial-gradient(circle at 70% 35%,#f3f3f3 0%,${props.bodyBgc} 130%)`
+        ? `radial-gradient(circle at 59% 36%,#f3f3f3 0%,${props.bodyBgc} 144%)`
         : `radial-gradient(circle at 48% 53%,#f3f3f3 0%,${props.bodyBgc} 70%)`};
     font-family: 'Alegreya Sans SC', sans-serif;
     height: 100vh;
