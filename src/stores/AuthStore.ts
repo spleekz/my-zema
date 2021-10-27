@@ -1,4 +1,5 @@
 import { makeAutoObservable } from 'mobx'
+import { makePersistable } from 'mobx-persist-store'
 
 export interface IAuthStore {
   access_token: string | null
@@ -12,6 +13,11 @@ export interface IAuthStore {
 export class AuthStore implements IAuthStore {
   constructor() {
     makeAutoObservable(this)
+    makePersistable(this, {
+      name: 'AuthStore',
+      properties: ['access_token'],
+      storage: window.localStorage,
+    })
   }
 
   access_token: string | null = null
