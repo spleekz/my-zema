@@ -81,9 +81,14 @@ export const YourSong: FC = (): JSX.Element => {
           <YourSongAlbumName>
             {makeFirstLetterCapital(RandomTrackStore.yourTrack.album_name)}
           </YourSongAlbumName>
+          <SpotifyPlayer
+            token={AuthStore.access_token!}
+            uris={[RandomTrackStore.yourTrack.uri]}
+            initialVolume={0.2}
+            autoPlay
+          />
         </YourSongInfo>
       </YourSongContainer>
-      <SpotifyPlayer token={AuthStore.access_token!} uris={[RandomTrackStore.yourTrack.uri]} />
     </YourSongPageContainer>
   )
 }
