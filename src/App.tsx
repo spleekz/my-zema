@@ -31,7 +31,10 @@ const GlobalStyles = createGlobalStyle<{ bodyBgc: string; isBodyBgcDark: boolean
     display: flex;
     flex-direction: column;
     min-height: 100%;
-  }
+  };
+  .rswp__active, ._InfoRSWP, .__mvqn38,._DevicesRSWP, .__omb1nz {
+    display: none;
+  };
 `
 const SignSpotify = styled.a``
 
