@@ -55,8 +55,8 @@ export const App: FC = observer((): JSX.Element => {
 
   useEffect(() => {
     if (window.location.hash) {
-      const { access_token, expires_in, token_type } = getHashValues(window.location.hash)
-      AuthStore.setAuthValues(access_token, Number(expires_in), token_type)
+      const { access_token, expires_in } = getHashValues(window.location.hash)
+      AuthStore.setAuthValues(access_token, Number(expires_in))
     }
   }, [window.location.hash])
 
