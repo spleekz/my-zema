@@ -45,7 +45,7 @@ const YourSongName = styled.div<{ explicit: boolean }>`
         color: #eeeeee;
         background-color: #b1b1b1;
         font-size: 19px;
-  font-weight: bold;
+        font-weight: bold;
         text-transform: uppercase;
         margin: 0 0 0 5px;
         padding: 1px;
@@ -72,6 +72,7 @@ export const YourSong: FC = (): JSX.Element => {
   useEffect(() => {
     if (bodyBgc) {
       AppStore.setBodyBgc(bodyBgc)
+      return () => AppStore.setBodyBgcToDefault()
     }
   }, [bodyBgc])
 
@@ -82,25 +83,25 @@ export const YourSong: FC = (): JSX.Element => {
         <YourSongInfo>
           <SongNaming>
             <YourSongName explicit={RandomTrackStore.yourTrack.explicit}>
-            {RandomTrackStore.yourTrack.name.includes('.')
-              ? RandomTrackStore.yourTrack.name
-              : makeFirstLetterCapital(RandomTrackStore.yourTrack.name)}
-          </YourSongName>
-          <YourSongAlbumName>
-            {makeFirstLetterCapital(RandomTrackStore.yourTrack.album_name)}
-          </YourSongAlbumName>
+              {RandomTrackStore.yourTrack.name.includes('.')
+                ? RandomTrackStore.yourTrack.name
+                : makeFirstLetterCapital(RandomTrackStore.yourTrack.name)}
+            </YourSongName>
+            <YourSongAlbumName>
+              {makeFirstLetterCapital(RandomTrackStore.yourTrack.album_name)}
+            </YourSongAlbumName>
           </SongNaming>
           <PlayerContainer>
-          <SpotifyPlayer
-            token={AuthStore.access_token!}
-            uris={[RandomTrackStore.yourTrack.uri]}
-            initialVolume={0.2}
+            <SpotifyPlayer
+              token={AuthStore.access_token!}
+              uris={[RandomTrackStore.yourTrack.uri]}
+              initialVolume={0.2}
               styles={{
                 bgColor: 'transparent',
                 sliderHeight: 8,
               }}
-            autoPlay
-          />
+              autoPlay
+            />
           </PlayerContainer>
         </YourSongInfo>
       </YourSongContainer>
