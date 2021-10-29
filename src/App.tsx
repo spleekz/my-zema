@@ -54,6 +54,10 @@ export const App: FC = observer((): JSX.Element => {
     }
   }, [AuthStore.access_token])
 
+  useEffect(() => {
+    AppStore.setBodyBgcToDefault()
+  }, [])
+
   return (
     <>
       <SignSpotify href={AuthStore.authUrl}>Sign in with Spotify</SignSpotify>
