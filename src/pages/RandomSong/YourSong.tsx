@@ -19,7 +19,10 @@ const YourSongImage = styled.img`
   pointer-events: none;
 `
 const YourSongInfo = styled.div`
-  margin: 12px 0 0 8px;
+  margin: 1px 0 0 8px;
+`
+const SongNaming = styled.div`
+  margin-bottom: 30px;
 `
 const YourSongName = styled.div<{ explicit: boolean }>`
   display: flex;
@@ -50,9 +53,13 @@ const YourSongName = styled.div<{ explicit: boolean }>`
     `}
 `
 const YourSongAlbumName = styled.div`
-  margin: -1px 0 0 2px;
-  font-size: 19px;
+  margin: -1px 0 0 3px;
+  font-size: 21px;
   color: #4b4b4bb3;
+`
+const PlayerContainer = styled.div`
+  display: inline-block;
+  width: 200px;
 `
 
 export const YourSong: FC = (): JSX.Element => {
@@ -73,6 +80,7 @@ export const YourSong: FC = (): JSX.Element => {
       <YourSongContainer>
         <YourSongImage src={RandomTrackStore.yourTrack.album_images[0].url} />
         <YourSongInfo>
+          <SongNaming>
             <YourSongName explicit={RandomTrackStore.yourTrack.explicit}>
             {RandomTrackStore.yourTrack.name.includes('.')
               ? RandomTrackStore.yourTrack.name
@@ -81,12 +89,19 @@ export const YourSong: FC = (): JSX.Element => {
           <YourSongAlbumName>
             {makeFirstLetterCapital(RandomTrackStore.yourTrack.album_name)}
           </YourSongAlbumName>
+          </SongNaming>
+          <PlayerContainer>
           <SpotifyPlayer
             token={AuthStore.access_token!}
             uris={[RandomTrackStore.yourTrack.uri]}
             initialVolume={0.2}
+              styles={{
+                bgColor: 'transparent',
+                sliderHeight: 8,
+              }}
             autoPlay
           />
+          </PlayerContainer>
         </YourSongInfo>
       </YourSongContainer>
     </YourSongPageContainer>

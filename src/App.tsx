@@ -32,9 +32,21 @@ const GlobalStyles = createGlobalStyle<{ bodyBgc: string; isBodyBgcDark: boolean
     flex-direction: column;
     min-height: 100%;
   };
-  .rswp__active, ._InfoRSWP, .__mvqn38,._DevicesRSWP, .__omb1nz {
+  .rswp__active, ._InfoRSWP, .__mvqn38,._DevicesRSWP, .__omb1nz,._ActionsRSWP {
     display: none;
   };
+  ._SliderRSWP, .__hpbuwm:hover {
+    cursor: pointer;
+  };
+  .__1q9n52d {
+    position: relative;
+    right:121px;
+    margin-top: 5px;
+  }
+  .__1q9n52d button {
+    width:36px;
+    height: 36px;
+  }
 `
 const SignSpotify = styled.a``
 
