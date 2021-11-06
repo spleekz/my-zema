@@ -54,19 +54,18 @@ export const App: FC = observer((): JSX.Element => {
   const { AppStore, TracksStore, AuthStore } = useStore()
 
   useEffect(() => {
-    if (window.location.hash) {
-      const { access_token, expires_in } = getHashValues(window.location.hash)
-      AuthStore.setAuthValues(access_token, Number(expires_in))
-    }
-  }, [window.location.hash])
-
-  useEffect(() => {
     if (AuthStore.access_token) {
       TracksStore.loadTracks(AuthStore.access_token)
     }
   }, [AuthStore.access_token])
 
   useEffect(() => {
+    if (!window.location.hash) {
+      window.location.replace(AuthStore.authUrl)
+    } else {
+      const { access_token, expires_in } = getHashValues(window.location.hash)
+      AuthStore.setAuthValues(access_token, Number(expires_in))
+    }
     AppStore.setBodyBgcToDefault()
   }, [])
 
